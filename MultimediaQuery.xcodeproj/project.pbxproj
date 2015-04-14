@@ -9,11 +9,40 @@
 /* Begin PBXBuildFile section */
 		9809D8041AD4896C0086C25B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9809D8031AD4896C0086C25B /* AppDelegate.m */; };
 		9809D8061AD4896C0086C25B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9809D8051AD4896C0086C25B /* main.m */; };
-		9809D8091AD4896C0086C25B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9809D8081AD4896C0086C25B /* ViewController.m */; };
-		9809D80C1AD4896C0086C25B /* MultimediaQuery.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9809D80A1AD4896C0086C25B /* MultimediaQuery.xcdatamodeld */; };
 		9809D80E1AD4896C0086C25B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9809D80D1AD4896C0086C25B /* Images.xcassets */; };
 		9809D8111AD4896C0086C25B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9809D80F1AD4896C0086C25B /* Main.storyboard */; };
 		9809D81D1AD4896C0086C25B /* MultimediaQueryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9809D81C1AD4896C0086C25B /* MultimediaQueryTests.m */; };
+		987FCAEE1AD715D5009BBDF7 /* MQBaseDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 987FCAED1AD715D5009BBDF7 /* MQBaseDescriptor.m */; };
+		987FCAF11AD71604009BBDF7 /* MQImageDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 987FCAF01AD71604009BBDF7 /* MQImageDescriptor.m */; };
+		987FCAF41AD71687009BBDF7 /* MQImageSignatrue.m in Sources */ = {isa = PBXBuildFile; fileRef = 987FCAF31AD71687009BBDF7 /* MQImageSignatrue.m */; };
+		987FCAF81AD7279C009BBDF7 /* MQImageDescriptorGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 987FCAF71AD7279C009BBDF7 /* MQImageDescriptorGenerator.m */; };
+		987FCAFB1AD751E5009BBDF7 /* MQQueryVideoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 987FCAFA1AD751E5009BBDF7 /* MQQueryVideoPreviewController.m */; };
+		987FCAFF1AD754F1009BBDF7 /* AVDroppablePlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 987FCAFE1AD754F1009BBDF7 /* AVDroppablePlayerView.m */; };
+		987FCB011AD75FAC009BBDF7 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 987FCB001AD75FAC009BBDF7 /* VideoToolbox.framework */; };
+		987FCB041AD7659D009BBDF7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 987FCB031AD7659D009BBDF7 /* QuartzCore.framework */; };
+		987FCB061AD765F5009BBDF7 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 987FCB051AD765F5009BBDF7 /* CorePlot.framework */; };
+		987FCB091AD7678E009BBDF7 /* MQImageDescriptorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 987FCB081AD7678E009BBDF7 /* MQImageDescriptorViewController.m */; };
+		987FCB0B1AD793C1009BBDF7 /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 987FCB051AD765F5009BBDF7 /* CorePlot.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		987FCB0E1AD79F5E009BBDF7 /* MQRootSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 987FCB0D1AD79F5E009BBDF7 /* MQRootSplitViewController.m */; };
+		98853E861ADA2C68008015A2 /* MQMotionDescriptorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98853E851ADA2C68008015A2 /* MQMotionDescriptorController.m */; };
+		98853E891ADA2CA3008015A2 /* MQMotionDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 98853E881ADA2CA3008015A2 /* MQMotionDescriptor.m */; };
+		98853E8C1ADA344C008015A2 /* MQMotionSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 98853E8B1ADA344C008015A2 /* MQMotionSignature.m */; };
+		98853E8F1ADA46AC008015A2 /* MQMotionDescriptorGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 98853E8E1ADA46AC008015A2 /* MQMotionDescriptorGenerator.m */; };
+		98853E921ADA46DF008015A2 /* MQImageBasedDescriptorGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 98853E911ADA46DF008015A2 /* MQImageBasedDescriptorGenerator.m */; };
+		98853E951ADA486E008015A2 /* MQBaseDescriptorGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 98853E941ADA486E008015A2 /* MQBaseDescriptorGenerator.m */; };
+		98D0A20A1AD49D910040DE9C /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D0A2091AD49D910040DE9C /* AVKit.framework */; };
+		98D0A2101AD4B49A0040DE9C /* MQVideoGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D0A20F1AD4B49A0040DE9C /* MQVideoGenerator.m */; };
+		98D0A2121AD4B4D40040DE9C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D0A2111AD4B4D40040DE9C /* AVFoundation.framework */; };
+		98D0C2FA1AD5E8550040DE9C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D0C2F91AD5E8550040DE9C /* AppKit.framework */; };
+		98D0C2FE1AD60D8C0040DE9C /* MQVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D0C2FD1AD60D8C0040DE9C /* MQVideo.m */; };
+		98D0C3021AD611FE0040DE9C /* MQQueryResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D0C3011AD611FE0040DE9C /* MQQueryResultViewController.m */; };
+		98F7DDD81AD8BD1D00C01ACD /* MQIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F7DDD71AD8BD1D00C01ACD /* MQIndicatorView.m */; };
+		98F7DDDD1AD8BF4600C01ACD /* MQDescriptorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F7DDDC1AD8BF4600C01ACD /* MQDescriptorViewController.m */; };
+		98F7DDE01AD8C14100C01ACD /* MQSourceVideoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F7DDDF1AD8C14100C01ACD /* MQSourceVideoPreviewController.m */; };
+		98F7DDE31AD8D8FA00C01ACD /* MQBackgroundColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F7DDE21AD8D8FA00C01ACD /* MQBackgroundColorView.m */; };
+		98FF11351AD646BB004A9E43 /* MQBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 98FF11341AD646BB004A9E43 /* MQBrain.m */; };
+		98FF11391AD661D6004A9E43 /* NSNotificationCenter+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98FF11381AD661D6004A9E43 /* NSNotificationCenter+Helper.m */; };
+		98FF113C1AD666F4004A9E43 /* MQVideoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98FF113B1AD666F4004A9E43 /* MQVideoPreviewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,20 +55,84 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		987FCB0A1AD793AC009BBDF7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				987FCB0B1AD793C1009BBDF7 /* CorePlot.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		9809D7FD1AD4896C0086C25B /* MultimediaQuery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultimediaQuery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9809D8011AD4896C0086C25B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9809D8021AD4896C0086C25B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9809D8031AD4896C0086C25B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9809D8051AD4896C0086C25B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		9809D8071AD4896C0086C25B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		9809D8081AD4896C0086C25B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		9809D80B1AD4896C0086C25B /* MultimediaQuery.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MultimediaQuery.xcdatamodel; sourceTree = "<group>"; };
 		9809D80D1AD4896C0086C25B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9809D8101AD4896C0086C25B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9809D8161AD4896C0086C25B /* MultimediaQueryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultimediaQueryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9809D81B1AD4896C0086C25B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9809D81C1AD4896C0086C25B /* MultimediaQueryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultimediaQueryTests.m; sourceTree = "<group>"; };
+		987FCAEC1AD715D5009BBDF7 /* MQBaseDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQBaseDescriptor.h; sourceTree = "<group>"; };
+		987FCAED1AD715D5009BBDF7 /* MQBaseDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQBaseDescriptor.m; sourceTree = "<group>"; };
+		987FCAEF1AD71604009BBDF7 /* MQImageDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQImageDescriptor.h; sourceTree = "<group>"; };
+		987FCAF01AD71604009BBDF7 /* MQImageDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQImageDescriptor.m; sourceTree = "<group>"; };
+		987FCAF21AD71687009BBDF7 /* MQImageSignatrue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQImageSignatrue.h; sourceTree = "<group>"; };
+		987FCAF31AD71687009BBDF7 /* MQImageSignatrue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQImageSignatrue.m; sourceTree = "<group>"; };
+		987FCAF61AD7279C009BBDF7 /* MQImageDescriptorGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQImageDescriptorGenerator.h; sourceTree = "<group>"; };
+		987FCAF71AD7279C009BBDF7 /* MQImageDescriptorGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQImageDescriptorGenerator.m; sourceTree = "<group>"; };
+		987FCAF91AD751E5009BBDF7 /* MQQueryVideoPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQQueryVideoPreviewController.h; sourceTree = "<group>"; };
+		987FCAFA1AD751E5009BBDF7 /* MQQueryVideoPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQQueryVideoPreviewController.m; sourceTree = "<group>"; };
+		987FCAFD1AD754F1009BBDF7 /* AVDroppablePlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVDroppablePlayerView.h; sourceTree = "<group>"; };
+		987FCAFE1AD754F1009BBDF7 /* AVDroppablePlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVDroppablePlayerView.m; sourceTree = "<group>"; };
+		987FCB001AD75FAC009BBDF7 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		987FCB031AD7659D009BBDF7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		987FCB051AD765F5009BBDF7 /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = "<group>"; };
+		987FCB071AD7678E009BBDF7 /* MQImageDescriptorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQImageDescriptorViewController.h; sourceTree = "<group>"; };
+		987FCB081AD7678E009BBDF7 /* MQImageDescriptorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQImageDescriptorViewController.m; sourceTree = "<group>"; };
+		987FCB0C1AD79F5E009BBDF7 /* MQRootSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQRootSplitViewController.h; sourceTree = "<group>"; };
+		987FCB0D1AD79F5E009BBDF7 /* MQRootSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQRootSplitViewController.m; sourceTree = "<group>"; };
+		98853E841ADA2C68008015A2 /* MQMotionDescriptorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQMotionDescriptorController.h; sourceTree = "<group>"; };
+		98853E851ADA2C68008015A2 /* MQMotionDescriptorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQMotionDescriptorController.m; sourceTree = "<group>"; };
+		98853E871ADA2CA3008015A2 /* MQMotionDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQMotionDescriptor.h; sourceTree = "<group>"; };
+		98853E881ADA2CA3008015A2 /* MQMotionDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQMotionDescriptor.m; sourceTree = "<group>"; };
+		98853E8A1ADA344C008015A2 /* MQMotionSignature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQMotionSignature.h; sourceTree = "<group>"; };
+		98853E8B1ADA344C008015A2 /* MQMotionSignature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQMotionSignature.m; sourceTree = "<group>"; };
+		98853E8D1ADA46AC008015A2 /* MQMotionDescriptorGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQMotionDescriptorGenerator.h; sourceTree = "<group>"; };
+		98853E8E1ADA46AC008015A2 /* MQMotionDescriptorGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQMotionDescriptorGenerator.m; sourceTree = "<group>"; };
+		98853E901ADA46DF008015A2 /* MQImageBasedDescriptorGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQImageBasedDescriptorGenerator.h; sourceTree = "<group>"; };
+		98853E911ADA46DF008015A2 /* MQImageBasedDescriptorGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQImageBasedDescriptorGenerator.m; sourceTree = "<group>"; };
+		98853E931ADA486E008015A2 /* MQBaseDescriptorGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQBaseDescriptorGenerator.h; sourceTree = "<group>"; };
+		98853E941ADA486E008015A2 /* MQBaseDescriptorGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQBaseDescriptorGenerator.m; sourceTree = "<group>"; };
+		98D0A2091AD49D910040DE9C /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		98D0A20E1AD4B49A0040DE9C /* MQVideoGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQVideoGenerator.h; sourceTree = "<group>"; };
+		98D0A20F1AD4B49A0040DE9C /* MQVideoGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQVideoGenerator.m; sourceTree = "<group>"; };
+		98D0A2111AD4B4D40040DE9C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		98D0C2F91AD5E8550040DE9C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		98D0C2FC1AD60D8C0040DE9C /* MQVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQVideo.h; sourceTree = "<group>"; };
+		98D0C2FD1AD60D8C0040DE9C /* MQVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQVideo.m; sourceTree = "<group>"; };
+		98D0C3001AD611FE0040DE9C /* MQQueryResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQQueryResultViewController.h; sourceTree = "<group>"; };
+		98D0C3011AD611FE0040DE9C /* MQQueryResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQQueryResultViewController.m; sourceTree = "<group>"; };
+		98F7DDD61AD8BD1D00C01ACD /* MQIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQIndicatorView.h; sourceTree = "<group>"; };
+		98F7DDD71AD8BD1D00C01ACD /* MQIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQIndicatorView.m; sourceTree = "<group>"; };
+		98F7DDDB1AD8BF4600C01ACD /* MQDescriptorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQDescriptorViewController.h; sourceTree = "<group>"; };
+		98F7DDDC1AD8BF4600C01ACD /* MQDescriptorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQDescriptorViewController.m; sourceTree = "<group>"; };
+		98F7DDDE1AD8C14100C01ACD /* MQSourceVideoPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQSourceVideoPreviewController.h; sourceTree = "<group>"; };
+		98F7DDDF1AD8C14100C01ACD /* MQSourceVideoPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQSourceVideoPreviewController.m; sourceTree = "<group>"; };
+		98F7DDE11AD8D8FA00C01ACD /* MQBackgroundColorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQBackgroundColorView.h; sourceTree = "<group>"; };
+		98F7DDE21AD8D8FA00C01ACD /* MQBackgroundColorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQBackgroundColorView.m; sourceTree = "<group>"; };
+		98FF11331AD646BB004A9E43 /* MQBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQBrain.h; sourceTree = "<group>"; };
+		98FF11341AD646BB004A9E43 /* MQBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQBrain.m; sourceTree = "<group>"; };
+		98FF11371AD661D6004A9E43 /* NSNotificationCenter+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+Helper.h"; sourceTree = "<group>"; };
+		98FF11381AD661D6004A9E43 /* NSNotificationCenter+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNotificationCenter+Helper.m"; sourceTree = "<group>"; };
+		98FF113A1AD666F4004A9E43 /* MQVideoPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQVideoPreviewController.h; sourceTree = "<group>"; };
+		98FF113B1AD666F4004A9E43 /* MQVideoPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQVideoPreviewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +140,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				987FCB061AD765F5009BBDF7 /* CorePlot.framework in Frameworks */,
+				987FCB041AD7659D009BBDF7 /* QuartzCore.framework in Frameworks */,
+				987FCB011AD75FAC009BBDF7 /* VideoToolbox.framework in Frameworks */,
+				98D0C2FA1AD5E8550040DE9C /* AppKit.framework in Frameworks */,
+				98D0A2121AD4B4D40040DE9C /* AVFoundation.framework in Frameworks */,
+				98D0A20A1AD49D910040DE9C /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +165,7 @@
 				9809D7FF1AD4896C0086C25B /* MultimediaQuery */,
 				9809D8191AD4896C0086C25B /* MultimediaQueryTests */,
 				9809D7FE1AD4896C0086C25B /* Products */,
+				987FCB021AD75FBD009BBDF7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,13 +181,11 @@
 		9809D7FF1AD4896C0086C25B /* MultimediaQuery */ = {
 			isa = PBXGroup;
 			children = (
-				9809D8021AD4896C0086C25B /* AppDelegate.h */,
-				9809D8031AD4896C0086C25B /* AppDelegate.m */,
-				9809D8071AD4896C0086C25B /* ViewController.h */,
-				9809D8081AD4896C0086C25B /* ViewController.m */,
-				9809D80D1AD4896C0086C25B /* Images.xcassets */,
-				9809D80F1AD4896C0086C25B /* Main.storyboard */,
-				9809D80A1AD4896C0086C25B /* MultimediaQuery.xcdatamodeld */,
+				987FCAFC1AD754CA009BBDF7 /* Views */,
+				987FCAF51AD71813009BBDF7 /* Generator */,
+				98FF11361AD661A0004A9E43 /* Helper */,
+				98D0C2FF1AD611DC0040DE9C /* Controllers */,
+				98D0C2FB1AD5F84B0040DE9C /* Models */,
 				9809D8001AD4896C0086C25B /* Supporting Files */,
 			);
 			path = MultimediaQuery;
@@ -96,6 +194,10 @@
 		9809D8001AD4896C0086C25B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9809D80D1AD4896C0086C25B /* Images.xcassets */,
+				9809D80F1AD4896C0086C25B /* Main.storyboard */,
+				9809D8021AD4896C0086C25B /* AppDelegate.h */,
+				9809D8031AD4896C0086C25B /* AppDelegate.m */,
 				9809D8011AD4896C0086C25B /* Info.plist */,
 				9809D8051AD4896C0086C25B /* main.m */,
 			);
@@ -119,6 +221,103 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		987FCAF51AD71813009BBDF7 /* Generator */ = {
+			isa = PBXGroup;
+			children = (
+				98D0A20E1AD4B49A0040DE9C /* MQVideoGenerator.h */,
+				98D0A20F1AD4B49A0040DE9C /* MQVideoGenerator.m */,
+				987FCAF61AD7279C009BBDF7 /* MQImageDescriptorGenerator.h */,
+				987FCAF71AD7279C009BBDF7 /* MQImageDescriptorGenerator.m */,
+				98853E8D1ADA46AC008015A2 /* MQMotionDescriptorGenerator.h */,
+				98853E8E1ADA46AC008015A2 /* MQMotionDescriptorGenerator.m */,
+				98853E901ADA46DF008015A2 /* MQImageBasedDescriptorGenerator.h */,
+				98853E911ADA46DF008015A2 /* MQImageBasedDescriptorGenerator.m */,
+				98853E931ADA486E008015A2 /* MQBaseDescriptorGenerator.h */,
+				98853E941ADA486E008015A2 /* MQBaseDescriptorGenerator.m */,
+			);
+			name = Generator;
+			sourceTree = "<group>";
+		};
+		987FCAFC1AD754CA009BBDF7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				987FCAFD1AD754F1009BBDF7 /* AVDroppablePlayerView.h */,
+				987FCAFE1AD754F1009BBDF7 /* AVDroppablePlayerView.m */,
+				98F7DDD61AD8BD1D00C01ACD /* MQIndicatorView.h */,
+				98F7DDD71AD8BD1D00C01ACD /* MQIndicatorView.m */,
+				98F7DDE11AD8D8FA00C01ACD /* MQBackgroundColorView.h */,
+				98F7DDE21AD8D8FA00C01ACD /* MQBackgroundColorView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		987FCB021AD75FBD009BBDF7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				987FCB051AD765F5009BBDF7 /* CorePlot.framework */,
+				987FCB031AD7659D009BBDF7 /* QuartzCore.framework */,
+				987FCB001AD75FAC009BBDF7 /* VideoToolbox.framework */,
+				98D0C2F91AD5E8550040DE9C /* AppKit.framework */,
+				98D0A2111AD4B4D40040DE9C /* AVFoundation.framework */,
+				98D0A2091AD49D910040DE9C /* AVKit.framework */,
+			);
+			name = Frameworks;
+			path = MultimediaQuery;
+			sourceTree = "<group>";
+		};
+		98D0C2FB1AD5F84B0040DE9C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				98D0C2FC1AD60D8C0040DE9C /* MQVideo.h */,
+				98D0C2FD1AD60D8C0040DE9C /* MQVideo.m */,
+				98FF11331AD646BB004A9E43 /* MQBrain.h */,
+				98FF11341AD646BB004A9E43 /* MQBrain.m */,
+				987FCAEC1AD715D5009BBDF7 /* MQBaseDescriptor.h */,
+				987FCAED1AD715D5009BBDF7 /* MQBaseDescriptor.m */,
+				987FCAEF1AD71604009BBDF7 /* MQImageDescriptor.h */,
+				987FCAF01AD71604009BBDF7 /* MQImageDescriptor.m */,
+				987FCAF21AD71687009BBDF7 /* MQImageSignatrue.h */,
+				987FCAF31AD71687009BBDF7 /* MQImageSignatrue.m */,
+				98853E871ADA2CA3008015A2 /* MQMotionDescriptor.h */,
+				98853E881ADA2CA3008015A2 /* MQMotionDescriptor.m */,
+				98853E8A1ADA344C008015A2 /* MQMotionSignature.h */,
+				98853E8B1ADA344C008015A2 /* MQMotionSignature.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		98D0C2FF1AD611DC0040DE9C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				98D0C3001AD611FE0040DE9C /* MQQueryResultViewController.h */,
+				98D0C3011AD611FE0040DE9C /* MQQueryResultViewController.m */,
+				98FF113A1AD666F4004A9E43 /* MQVideoPreviewController.h */,
+				98FF113B1AD666F4004A9E43 /* MQVideoPreviewController.m */,
+				987FCAF91AD751E5009BBDF7 /* MQQueryVideoPreviewController.h */,
+				987FCAFA1AD751E5009BBDF7 /* MQQueryVideoPreviewController.m */,
+				987FCB071AD7678E009BBDF7 /* MQImageDescriptorViewController.h */,
+				987FCB081AD7678E009BBDF7 /* MQImageDescriptorViewController.m */,
+				987FCB0C1AD79F5E009BBDF7 /* MQRootSplitViewController.h */,
+				987FCB0D1AD79F5E009BBDF7 /* MQRootSplitViewController.m */,
+				98F7DDDB1AD8BF4600C01ACD /* MQDescriptorViewController.h */,
+				98F7DDDC1AD8BF4600C01ACD /* MQDescriptorViewController.m */,
+				98F7DDDE1AD8C14100C01ACD /* MQSourceVideoPreviewController.h */,
+				98F7DDDF1AD8C14100C01ACD /* MQSourceVideoPreviewController.m */,
+				98853E841ADA2C68008015A2 /* MQMotionDescriptorController.h */,
+				98853E851ADA2C68008015A2 /* MQMotionDescriptorController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		98FF11361AD661A0004A9E43 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				98FF11371AD661D6004A9E43 /* NSNotificationCenter+Helper.h */,
+				98FF11381AD661D6004A9E43 /* NSNotificationCenter+Helper.m */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -129,6 +328,7 @@
 				9809D7F91AD4896C0086C25B /* Sources */,
 				9809D7FA1AD4896C0086C25B /* Frameworks */,
 				9809D7FB1AD4896C0086C25B /* Resources */,
+				987FCB0A1AD793AC009BBDF7 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -218,10 +418,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9809D8091AD4896C0086C25B /* ViewController.m in Sources */,
-				9809D80C1AD4896C0086C25B /* MultimediaQuery.xcdatamodeld in Sources */,
+				98FF113C1AD666F4004A9E43 /* MQVideoPreviewController.m in Sources */,
+				98853E8C1ADA344C008015A2 /* MQMotionSignature.m in Sources */,
+				98D0A2101AD4B49A0040DE9C /* MQVideoGenerator.m in Sources */,
+				98F7DDE31AD8D8FA00C01ACD /* MQBackgroundColorView.m in Sources */,
+				987FCAF11AD71604009BBDF7 /* MQImageDescriptor.m in Sources */,
+				987FCB0E1AD79F5E009BBDF7 /* MQRootSplitViewController.m in Sources */,
+				98D0C2FE1AD60D8C0040DE9C /* MQVideo.m in Sources */,
+				98F7DDE01AD8C14100C01ACD /* MQSourceVideoPreviewController.m in Sources */,
+				98F7DDDD1AD8BF4600C01ACD /* MQDescriptorViewController.m in Sources */,
+				98D0C3021AD611FE0040DE9C /* MQQueryResultViewController.m in Sources */,
+				98853E8F1ADA46AC008015A2 /* MQMotionDescriptorGenerator.m in Sources */,
+				98FF11391AD661D6004A9E43 /* NSNotificationCenter+Helper.m in Sources */,
+				98853E861ADA2C68008015A2 /* MQMotionDescriptorController.m in Sources */,
+				987FCAF41AD71687009BBDF7 /* MQImageSignatrue.m in Sources */,
+				987FCAFB1AD751E5009BBDF7 /* MQQueryVideoPreviewController.m in Sources */,
+				987FCAFF1AD754F1009BBDF7 /* AVDroppablePlayerView.m in Sources */,
+				987FCAEE1AD715D5009BBDF7 /* MQBaseDescriptor.m in Sources */,
+				98FF11351AD646BB004A9E43 /* MQBrain.m in Sources */,
 				9809D8061AD4896C0086C25B /* main.m in Sources */,
+				98853E921ADA46DF008015A2 /* MQImageBasedDescriptorGenerator.m in Sources */,
+				98F7DDD81AD8BD1D00C01ACD /* MQIndicatorView.m in Sources */,
+				987FCAF81AD7279C009BBDF7 /* MQImageDescriptorGenerator.m in Sources */,
 				9809D8041AD4896C0086C25B /* AppDelegate.m in Sources */,
+				98853E951ADA486E008015A2 /* MQBaseDescriptorGenerator.m in Sources */,
+				98853E891ADA2CA3008015A2 /* MQMotionDescriptor.m in Sources */,
+				987FCB091AD7678E009BBDF7 /* MQImageDescriptorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,9 +557,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MultimediaQuery",
+				);
 				INFOPLIST_FILE = MultimediaQuery/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -346,9 +577,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MultimediaQuery",
+				);
 				INFOPLIST_FILE = MultimediaQuery/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -408,6 +648,7 @@
 				9809D8221AD4896C0086C25B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9809D8231AD4896C0086C25B /* Build configuration list for PBXNativeTarget "MultimediaQueryTests" */ = {
 			isa = XCConfigurationList;
@@ -416,21 +657,9 @@
 				9809D8251AD4896C0086C25B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		9809D80A1AD4896C0086C25B /* MultimediaQuery.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				9809D80B1AD4896C0086C25B /* MultimediaQuery.xcdatamodel */,
-			);
-			currentVersion = 9809D80B1AD4896C0086C25B /* MultimediaQuery.xcdatamodel */;
-			path = MultimediaQuery.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 9809D7F51AD4896C0086C25B /* Project object */;
 }

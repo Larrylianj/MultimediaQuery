@@ -13,4 +13,6 @@
 
 @property (nonatomic, assign) CGPoint percentagePoint;
 
+@property (nonatomic, assign) CGFloat maxIndicatorX;
+
 @end

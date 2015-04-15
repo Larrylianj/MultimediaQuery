@@ -41,38 +41,33 @@
         MQImageSignatrue *sig = [[MQImageSignatrue alloc] initWithJSONArray:sigArr];
         [self appendImageSignature:sig];
     }
+    NSLog(@"");
 }
 
 - (void)appendImageSignature:(MQImageSignatrue *)sig; {
     [self.imageSignatures addObject:sig];
 }
 
-- (float)updateWithQueryVideoImageDescriptor:(MQImageDescriptor *)query {
+- (void)updateWithQueryVideoImageDescriptor:(MQImageDescriptor *)query {
     NSUInteger m = self.imageSignatures.count;
     NSUInteger n = query.imageSignatures.count;
-    float ret = 0;
     
     NSMutableArray *matchingScroes = [[NSMutableArray alloc] initWithCapacity:self.imageSignatures.count];
     
     for (NSUInteger i = 0; i < m; i++) {
-        float curr = 0;
-        for (NSUInteger j = 0; j < n && i + j < m; j++) {
-            MQImageSignatrue *a = self.imageSignatures[i + j];
+        float dis = 0;
+        for (NSUInteger j = 0; j < n; j++) {
+            MQImageSignatrue *a = self.imageSignatures[i + j < m ? i + j : m - 2 + (m - i - j)];
             MQImageSignatrue *b = query.imageSignatures[j];
             float distance = [a distanceToSignature:b];
-            curr += distance;
+            dis += distance;
         }
-        float count = MIN(n, m - i);
-        curr = (count - curr) / count;
+        float curr = 1 - dis / n;
         matchingScroes[i] = @(curr);
-        
-        if (ret < curr) {
-            ret = curr;
-        }
     }
     
     _matchingScores = matchingScroes;
-    return ret;
+
 }
 
 @end

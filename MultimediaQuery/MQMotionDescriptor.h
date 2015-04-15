@@ -14,6 +14,6 @@
 
 - (void)appendMotionSignature:(MQMotionSignature *)sig;
 
-- (float)updateWithQueryVideoMotionDescriptor:(MQMotionDescriptor *)query;
+- (void)updateWithQueryVideoMotionDescriptor:(MQMotionDescriptor *)query;
 
 @end

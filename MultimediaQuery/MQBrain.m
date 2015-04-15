@@ -41,6 +41,7 @@ typedef void (^QueryVideoSetupHandler)(void);
 - (void)setupWithRootFolderPath:(NSString *)path {
     self.rootFolderPath = path;
     NSArray *subFolderPaths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:nil];
+    // subFolderPaths = @[@"musicvideo"];
     for (NSString *subPath in subFolderPaths) {
         [self setupVideoAtFolderPath:[path stringByAppendingFormat:@"/%@", subPath] isQueryFile:NO];
     }
@@ -62,7 +63,9 @@ typedef void (^QueryVideoSetupHandler)(void);
     [self waitForQueryVideoSetup:^{
         [self addSetupTask:YES];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            for (MQVideo *video in self.videoStore.allValues) {
+            NSArray *array = self.videoStore.allValues;
+            // array = @[self.videoStore[@"/Users/zichuanwang/Downloads/source_data/musicvideo"]];
+            for (MQVideo *video in array) {
                 if (video != self.queryVideo) {
                     [video updateDescriptorsWithQueryVideo:self.queryVideo];
                 }
@@ -82,6 +85,9 @@ typedef void (^QueryVideoSetupHandler)(void);
 - (NSArray *)queryResults {
     NSMutableArray *array = [NSMutableArray arrayWithArray:self.videoStore.allValues];
     [array removeObject:self.queryVideo];
+    
+    // array = [NSMutableArray arrayWithArray:@[self.videoStore[@"/Users/zichuanwang/Downloads/source_data/musicvideo"]]];
+    
     [array sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         float a = [obj1 totalScore];
         float b = [obj2 totalScore];

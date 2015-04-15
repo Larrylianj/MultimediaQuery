@@ -43,33 +43,34 @@
         MQMotionSignature *sig = [[MQMotionSignature alloc] initWithJSONArray:sigArr];
         [self appendMotionSignature:sig];
     }
+    
+    for (MQMotionSignature *sig in self.motionSignatures) {
+        printf("%f, ", sig.movementPercentage);
+    }
+    printf("\n");
 }
 
-- (float)updateWithQueryVideoMotionDescriptor:(MQMotionDescriptor *)query {
+- (void)updateWithQueryVideoMotionDescriptor:(MQMotionDescriptor *)query {
     NSUInteger m = self.motionSignatures.count;
     NSUInteger n = query.motionSignatures.count;
-    float ret = 0;
     
     NSMutableArray *matchingScroes = [[NSMutableArray alloc] initWithCapacity:self.motionSignatures.count];
     
+
     for (NSUInteger i = 0; i < m; i++) {
         float dis = 0;
-        for (NSUInteger j = 0; j < n && i + j < m; j++) {
-            MQMotionSignature *a = self.motionSignatures[i + j];
+        for (NSUInteger j = 0; j < n; j++) {
+            MQMotionSignature *a = self.motionSignatures[i + j < m ? i + j : m - 2 + (m - i - j)];
             MQMotionSignature *b = query.motionSignatures[j];
             float distance = [a distanceToSignature:b];
             dis += distance;
         }
-        float curr = 1 - dis / m;
+        float curr = 1 - dis / n;
         matchingScroes[i] = @(curr);
-        
-        if (ret < curr) {
-            ret = curr;
-        }
     }
     
+    [matchingScroes addObject:@(0)];
     _matchingScores = matchingScroes;
-    return ret;
 }
 
 @end

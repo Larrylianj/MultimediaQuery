@@ -290,7 +290,7 @@
         AVMutableCompositionTrack *bCompositionAudioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
         [bCompositionAudioTrack insertTimeRange:audioTimeRange ofTrack:[[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:nextClipStartTime error:nil];
     } else {
-        NSLog(@"Didn't audio find in source folder -- %@", self.sourceFolderPath.lastPathComponent);
+        NSLog(@"Didn't find audio in source folder -- %@", self.sourceFolderPath.lastPathComponent);
     }
     
     AVAssetExportSession *assetExport = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetPassthrough];

@@ -13,10 +13,13 @@
 @interface MQMotionSignature : NSObject
 
 @property (nonatomic, readonly) NSArray *JSONPresentation;
+@property (nonatomic, readonly) float movementPercentage;
 
 - (id)initWithData:(NSData *)data;
 
 - (id)initWithJSONArray:(NSArray *)array;
+
+@property (nonatomic, readonly) CGPoint avgVector;
 
 /* max: 1 min: 0 */
 - (float)distanceToSignature:(MQMotionSignature *)sig;

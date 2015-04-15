@@ -30,7 +30,7 @@
 #pragma mark - Methods to Overwrite
 
 - (NSString *)targetJSONFileName {
-    return [NSString stringWithFormat:@"%@_motion_descriptor.json", self.sourceFolderPath.lastPathComponent];
+    return [NSString stringWithFormat:@"%@_motion_descriptor4.json", self.sourceFolderPath.lastPathComponent];
 }
 
 - (void)dealloc {
@@ -76,6 +76,49 @@
     return self;
 }
 
+- (void)setCurrImageFileRawData:(NSData *)currImageFileRawData {
+    if (_currImageFileRawData != currImageFileRawData) {
+        _currImageFileRawData = currImageFileRawData;
+        
+        // Assign first level of current hierarchy RGB by assigning pointer of current image file raw data's bytes
+        _currHierarchyRGB[0] = (unsigned char *)[currImageFileRawData bytes];
+        
+        int width = (int)self.imageSize.width;
+        int height = (int)self.imageSize.height;
+        
+        // Calculate each level RGB by downsizing previous levev's RGB by 2
+        for (int i = 1; i < 4; i++) {
+            width /= 2;
+            height /= 2;
+            int area = width * height;
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    for (int k = 0; k < 3; k++) {
+                        int val = 0;
+                        for (int m = 0; m < 2; m++) {
+                            for (int n = 0; n < 2; n++) {
+                                int idx = (y * 2 + m) * width * 2 + x * 2 + n;
+                                val += _currHierarchyRGB[i - 1][idx + area * 4 * k] & 0xff;
+                            }
+                        }
+                        _currHierarchyRGB[i][y * width + x + area * k] = ((val / 4) & 0xff);
+                    }
+                }
+            }
+        }
+    }
+}
+
+- (void)setPrevImageFileRawData:(NSData *)prevImageFileRawData {
+    if (_prevImageFileRawData != prevImageFileRawData) {
+        _prevImageFileRawData = prevImageFileRawData;
+        // Copy current hierarchy RGB by switching pointers
+        unsigned char **temp = _prevHierarchyRGB;
+        _prevHierarchyRGB = _currHierarchyRGB;
+        _currHierarchyRGB = temp;
+    }
+}
+
 #pragma mark - Logic
 
 - (void)convertImagesToImageDescriptor {
@@ -99,35 +142,11 @@
         if (![fileURL.pathExtension.lowercaseString isEqualToString:@"rgb"]) {
             continue;
         }
-        NSLog(@"file name: %@", fileURL.absoluteString);
+        // NSLog(@"file name: %@", fileURL.absoluteString);
         NSData *data = [NSData dataWithContentsOfURL:fileURL];
         
         // Configure curr data
         self.currImageFileRawData = data;
-        _currHierarchyRGB[0] = (unsigned char *)[data bytes];
-        
-        int width = (int)self.imageSize.width;
-        int height = (int)self.imageSize.height;
-        
-        for (int i = 1; i < 4; i++) {
-            width /= 2;
-            height /= 2;
-            int area = width * height;
-            for (int y = 0; y < height; y++) {
-                for (int x = 0; x < width; x++) {
-                    for (int k = 0; k < 3; k++) {
-                        int val = 0;
-                        for (int m = 0; m < 2; m++) {
-                            for (int n = 0; n < 2; n++) {
-                                int idx = y * 4 * width + m * width * 2 + x * 2 + n;
-                                val += _currHierarchyRGB[i - 1][idx + area * 4 * k] & 0xff;
-                            }
-                        }
-                        _currHierarchyRGB[i][y * height + x + area * k] = ((val / 4) & 0xff);
-                    }
-                }
-            }
-        }
         
         if (self.prevImageFileRawData) {
             MQMotionSignature *sig = [self motionSignatureForCurrentFrame];
@@ -136,9 +155,6 @@
         
         // Configure prev data
         self.prevImageFileRawData = data;
-        unsigned char **temp = _prevHierarchyRGB;
-        _prevHierarchyRGB = _currHierarchyRGB;
-        _currHierarchyRGB = temp;
         
     }
     [descriptor writeOutToFileWithURL:self.targetJSONFileURL];
@@ -170,6 +186,7 @@
     for (int i = 0; i < 3; i++) {
         diff += abs(prgb[i] - crgb[i]);
     }
+    // NSLog(@"px: %@, py: %@, cx: %@, cy: %@, lvl: %@, diff: %@", @(px), @(py), @(cx), @(cy), @(lvl), @(diff));
     return diff;
 }
 
@@ -187,46 +204,50 @@
     int currX = column * blockWidth;
     int currY = row * blockHeight;
     
+    CGPoint ret = CGPointZero;
+    int32_t maxDiff = INT32_MAX;
+    
     if (lvl == 3) {
-        
-        CGPoint ret = CGPointZero;
         for (int i = MAX(currY - k, 0); i <= MIN(currY + k, height - blockHeight - 1); i++) {
             for (int j = MAX(currX - k, 0); j <= MIN(currX + k, width - blockWidth - 1); j++) {
-                
-                int32_t diff = INT32_MAX;
+                int32_t currDiff = 0;
                 for (int m = 0; m < blockHeight; m++) {
                     for (int n = 0; n < blockWidth; n++) {
-                        int32_t currDiff =  [self differenceBetweenPrevFrameAtX:n + j prevY:i + m withCurrentFrameAtX:currX currY:currY level:lvl];
-                        if (currDiff < diff) {
-                            diff = currDiff;
-                            ret = CGPointMake(j, i);
-                        }
+                        currDiff += [self differenceBetweenPrevFrameAtX:j + n prevY:i + m withCurrentFrameAtX:currX currY:currY level:lvl];
                     }
+                }
+                if (currDiff < maxDiff || (i == currY && j == currX && abs(currDiff - maxDiff) < 30)) {
+                    maxDiff = currDiff;
+                    ret = CGPointMake(j, i);
                 }
             }
         }
-        
-        return ret;
     } else {
-        CGPoint ret = [self hierarchicalSearchMotionVectorForBlockAtRow:row
-                                                                 column:column
-                                                        candidateLength:k / 2
-                                                                  level:lvl + 1];
+        CGPoint target = [self hierarchicalSearchMotionVectorForBlockAtRow:row
+                                                         column:column
+                                                candidateLength:k / 2
+                                                          level:lvl + 1];
         
-        int targetX = ret.x * 2;
-        int targetY = ret.y * 2;
-        int32_t diff = INT32_MAX;
+        int targetX = target.x * 2;
+        int targetY = target.y * 2;
+        
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
-                int32_t currDiff = [self differenceBetweenPrevFrameAtX:targetX + j prevY:targetY + i withCurrentFrameAtX:currX currY:currY level:lvl];
-                if (currDiff < diff) {
-                    diff = currDiff;
+                int32_t currDiff = 0;
+                for (int m = 0; m < blockHeight; m++) {
+                    for (int n = 0; n < blockWidth; n++) {
+                        currDiff += [self differenceBetweenPrevFrameAtX:targetX + j + n prevY:targetY + i + m withCurrentFrameAtX:currX currY:currY level:lvl];
+                    }
+                }
+                if (currDiff < maxDiff) {
+                    maxDiff = currDiff;
                     ret = CGPointMake(targetX + j, targetY + i);
                 }
             }
         }
-        return ret;
     }
+    // NSLog(@"row: %@, column: %@, level: %@, vector: %@", @(row), @(column), @(lvl), NSStringFromPoint(ret));
+    return ret;
 }
 
 - (CGPoint)motionVectorForBlockAtRow:(int)row
@@ -236,8 +257,11 @@
     int blockHeight = (int)self.blockSize.height;
     int x = column * blockWidth;
     int y = row * blockHeight;
+    
     CGPoint ret = [self hierarchicalSearchMotionVectorForBlockAtRow:row column:column candidateLength:k level:0];
-    return CGPointMake(ret.x - x, ret.y - y);
+    ret = CGPointMake(x - ret.x, y - ret.y);
+    // NSLog(@"row: %@, column: %@, ret: %@", @(row), @(column), NSStringFromPoint(ret));
+    return ret;
 }
 
 - (MQMotionSignature *)motionSignatureForCurrentFrame {
@@ -251,6 +275,7 @@
     
     NSData *sigData = [[NSData alloc] initWithBytes:_vectors length:self.vectorSize * sizeof(CGPoint)];
     MQMotionSignature *sig = [[MQMotionSignature alloc] initWithData:sigData];
+    // NSLog(@"sig: %@", sig.JSONPresentation);
     
     return sig;
 }

@@ -11,6 +11,7 @@
 @interface MQIndicatorLayer () {
     NSColor *_lineColor;
     NSColor *_indicatorColor;
+    NSColor *_maxIndicatorColor;
 }
 
 
@@ -23,6 +24,7 @@
     if (self) {
         _indicatorColor = [NSColor colorWithRed:0 / 255. green:0 / 255. blue:0 / 255. alpha:0.4];
         _lineColor = [NSColor whiteColor];
+        _maxIndicatorColor = [NSColor redColor];
     }
     return self;
 }
@@ -31,11 +33,14 @@
     CGContextSetFillColorWithColor(ctx, _lineColor.CGColor);
     CGContextFillRect(ctx, CGRectMake(0, 0, 1, self.bounds.size.height));
     
-    CGFloat x = floor(self.bounds.size.width * self.percentagePoint.x);
+    CGFloat x = floor(self.bounds.size.width * self.maxIndicatorX);
+    CGContextSetFillColorWithColor(ctx, _maxIndicatorColor.CGColor);
+    CGContextFillRect(ctx, CGRectMake(x - 1, 0, 2, self.bounds.size.height));
+    
+    x = floor(self.bounds.size.width * self.percentagePoint.x);
     // CGFloat y = floor(self.bounds.size.height * self.percentagePoint.y);
     CGContextSetFillColorWithColor(ctx, _indicatorColor.CGColor);
-    CGContextFillRect(ctx, CGRectMake(x, 0, 2, self.bounds.size.height));
-    // CGContextFillEllipseInRect(ctx, CGRectMake(x - 5, y - 5, 10, 10));
+    CGContextFillRect(ctx, CGRectMake(x - 1, 0, 2, self.bounds.size.height));
 }
 
 - (void)setPercentagePoint:(CGPoint)percentagePoint {

@@ -22,7 +22,7 @@
 
 @property (nonatomic, strong) CPTPlot *plot;
 
-@property (nonatomic, assign) float maxMatchingScore;
+@property (nonatomic, assign) NSUInteger maxMatchingIndex;
 
 @end
 
@@ -30,8 +30,9 @@
 
 - (void)setVideo:(MQVideo *)video {
     if (_dataForPlot.count == 0) return;
-    self.maxMatchingScore = video.totalScore;
+    self.maxMatchingIndex = video.maxTotalScoreIndex;
     if (!self.plot) [self setupCoreplotViews];
+    [self updateIndicatorLayer];
     [self.plot reloadData];
 }
 
@@ -42,6 +43,12 @@
         CGFloat percentage = [note.userInfo[@"percentage"] floatValue];
         self.indicatorLayer.percentagePoint = CGPointMake(percentage, 0);
     }];
+}
+
+- (void)updateIndicatorLayer {
+    self.indicatorLayer.percentagePoint = CGPointMake(-100, -100);
+    self.indicatorLayer.maxIndicatorX = (CGFloat)self.maxMatchingIndex / _dataForPlot.count;
+    [self.indicatorLayer setNeedsDisplay];
 }
 
 - (void)setupCoreplotViews {
@@ -79,8 +86,6 @@
     
     self.indicatorLayer = [[MQIndicatorLayer alloc] initWithFrame:self.hostingView.bounds];
     [self.hostingView.layer addSublayer:self.indicatorLayer];
-    self.indicatorLayer.percentagePoint = CGPointMake(-100, -100);
-    [self.indicatorLayer setNeedsDisplay];
     
     self.plot = plot;
 }

@@ -23,6 +23,7 @@
 @property (nonatomic, readwrite) NSString *audioFileName;
 @property (nonatomic, readwrite) MQImageDescriptor *imageDescriptor;
 @property (nonatomic, readwrite) MQMotionDescriptor *motionDescriptor;
+@property (nonatomic, readwrite) NSUInteger maxTotalScoreIndex;
 
 @end
 
@@ -80,17 +81,30 @@
         self.imageDescriptor = [[MQImageDescriptor alloc] initWithJSONFilePath:imageDescriptorFilePath];
     }
     
-    NSString *motionDescriptorFileName = [NSString stringWithFormat:@"%@_motion_descriptor.json", self.name];
+    NSString *motionDescriptorFileName = [NSString stringWithFormat:@"%@_motion_descriptor4.json", self.name];
     NSString *motionDescriptorFilePath = [NSString stringWithFormat:@"%@/%@", self.sourceFolderPath, motionDescriptorFileName];
     if ([manager fileExistsAtPath:motionDescriptorFilePath]) {
+        NSLog(@"name: %@", self.name);
         self.motionDescriptor = [[MQMotionDescriptor alloc] initWithJSONFilePath:motionDescriptorFilePath];
     }
 }
 
 - (void)updateDescriptorsWithQueryVideo:(MQVideo *)video {
-    self.motionScore = [self.motionDescriptor updateWithQueryVideoMotionDescriptor:video.motionDescriptor];
-    self.imageScore = [self.imageDescriptor updateWithQueryVideoImageDescriptor:video.imageDescriptor];
-    self.totalScore = self.imageScore * 0.6 + self.motionScore * 0.4;
+    [self.motionDescriptor updateWithQueryVideoMotionDescriptor:video.motionDescriptor];
+    [self.imageDescriptor updateWithQueryVideoImageDescriptor:video.imageDescriptor];
+    
+    self.totalScore = 0;
+    for (NSUInteger i = 0; i < self.imageDescriptor.matchingScores.count; i++) {
+        float imageScore = [self.imageDescriptor.matchingScores[i] floatValue];
+        float motionScore = [self.motionDescriptor.matchingScores[i] floatValue];
+        float totalScore = imageScore * 0.6 + motionScore * 0.4;
+        if (totalScore > self.totalScore) {
+            self.totalScore = totalScore;
+            self.imageScore = imageScore;
+            self.motionScore = motionScore;
+            self.maxTotalScoreIndex = i;
+        }
+    }
 }
 
 @end

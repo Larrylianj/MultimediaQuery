@@ -15,6 +15,7 @@
 
 @property (nonatomic, copy, readonly) NSString *name;
 @property (nonatomic, assign, readonly) float totalScore;
+@property (nonatomic, assign, readonly) NSUInteger maxTotalScoreIndex;
 @property (nonatomic, assign, readonly) float imageScore;
 @property (nonatomic, assign, readonly) float motionScore;
 @property (nonatomic, assign, readonly) float audioScore;
@@ -25,6 +26,7 @@
 @property (nonatomic, readonly) NSString *motionScoreString;
 @property (nonatomic, readonly) NSString *audioScoreString;
 @property (nonatomic, readonly) NSString *previewVideoFilePath;
+
 // @property (nonatomic, readonly) NSString *audioFilePath;
 
 @property (nonatomic, strong, readonly) MQImageDescriptor *imageDescriptor;

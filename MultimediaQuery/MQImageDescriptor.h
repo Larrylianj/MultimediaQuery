@@ -14,6 +14,6 @@
 
 - (void)appendImageSignature:(MQImageSignatrue *)sig;
 
-- (float)updateWithQueryVideoImageDescriptor:(MQImageDescriptor *)query;
+- (void)updateWithQueryVideoImageDescriptor:(MQImageDescriptor *)query;
 
 @end

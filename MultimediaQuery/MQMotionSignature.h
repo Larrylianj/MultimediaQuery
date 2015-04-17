@@ -19,9 +19,9 @@
 
 - (id)initWithJSONArray:(NSArray *)array;
 
-@property (nonatomic, readonly) CGPoint avgVector;
-
 /* max: 1 min: 0 */
 - (float)distanceToSignature:(MQMotionSignature *)sig;
+
+- (BOOL)detectedMovementForPixelIndex:(int)idx;
 
 @end

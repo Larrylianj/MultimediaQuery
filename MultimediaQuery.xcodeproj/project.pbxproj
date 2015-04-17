@@ -12,6 +12,7 @@
 		9809D80E1AD4896C0086C25B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9809D80D1AD4896C0086C25B /* Images.xcassets */; };
 		9809D8111AD4896C0086C25B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9809D80F1AD4896C0086C25B /* Main.storyboard */; };
 		9809D81D1AD4896C0086C25B /* MultimediaQueryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9809D81C1AD4896C0086C25B /* MultimediaQueryTests.m */; };
+		9849E1DD1ADF2569005DE333 /* MQMotionDebugVideoGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9849E1DC1ADF2569005DE333 /* MQMotionDebugVideoGenerator.m */; };
 		987FCAEE1AD715D5009BBDF7 /* MQBaseDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 987FCAED1AD715D5009BBDF7 /* MQBaseDescriptor.m */; };
 		987FCAF11AD71604009BBDF7 /* MQImageDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 987FCAF01AD71604009BBDF7 /* MQImageDescriptor.m */; };
 		987FCAF41AD71687009BBDF7 /* MQImageSignatrue.m in Sources */ = {isa = PBXBuildFile; fileRef = 987FCAF31AD71687009BBDF7 /* MQImageSignatrue.m */; };
@@ -79,6 +80,8 @@
 		9809D8161AD4896C0086C25B /* MultimediaQueryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultimediaQueryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9809D81B1AD4896C0086C25B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9809D81C1AD4896C0086C25B /* MultimediaQueryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultimediaQueryTests.m; sourceTree = "<group>"; };
+		9849E1DB1ADF2569005DE333 /* MQMotionDebugVideoGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQMotionDebugVideoGenerator.h; sourceTree = "<group>"; };
+		9849E1DC1ADF2569005DE333 /* MQMotionDebugVideoGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQMotionDebugVideoGenerator.m; sourceTree = "<group>"; };
 		987FCAEC1AD715D5009BBDF7 /* MQBaseDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQBaseDescriptor.h; sourceTree = "<group>"; };
 		987FCAED1AD715D5009BBDF7 /* MQBaseDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQBaseDescriptor.m; sourceTree = "<group>"; };
 		987FCAEF1AD71604009BBDF7 /* MQImageDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQImageDescriptor.h; sourceTree = "<group>"; };
@@ -234,6 +237,8 @@
 				98853E911ADA46DF008015A2 /* MQImageBasedDescriptorGenerator.m */,
 				98853E931ADA486E008015A2 /* MQBaseDescriptorGenerator.h */,
 				98853E941ADA486E008015A2 /* MQBaseDescriptorGenerator.m */,
+				9849E1DB1ADF2569005DE333 /* MQMotionDebugVideoGenerator.h */,
+				9849E1DC1ADF2569005DE333 /* MQMotionDebugVideoGenerator.m */,
 			);
 			name = Generator;
 			sourceTree = "<group>";
@@ -419,6 +424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98FF113C1AD666F4004A9E43 /* MQVideoPreviewController.m in Sources */,
+				9849E1DD1ADF2569005DE333 /* MQMotionDebugVideoGenerator.m in Sources */,
 				98853E8C1ADA344C008015A2 /* MQMotionSignature.m in Sources */,
 				98D0A2101AD4B49A0040DE9C /* MQVideoGenerator.m in Sources */,
 				98F7DDE31AD8D8FA00C01ACD /* MQBackgroundColorView.m in Sources */,

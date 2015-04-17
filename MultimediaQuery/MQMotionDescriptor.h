@@ -16,4 +16,6 @@
 
 - (void)updateWithQueryVideoMotionDescriptor:(MQMotionDescriptor *)query;
 
+- (BOOL)detectedMovementAtFrame:(int)frame pixelIndex:(int)idx;
+
 @end

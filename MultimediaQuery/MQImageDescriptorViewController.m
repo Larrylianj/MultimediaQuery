@@ -26,4 +26,8 @@
     [super setVideo: video];
 }
 
+- (NSColor *)themeColor {
+    return [NSColor colorWithRed:89 / 255. green:166 / 255. blue:225 / 255. alpha:1];
+}
+
 @end

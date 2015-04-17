@@ -69,11 +69,11 @@
     lineStyle.lineColor = [CPTColor colorWithCGColor:[NSColor whiteColor].CGColor];
     plot.dataLineStyle = lineStyle;
     
-    plot.areaFill = [[CPTFill alloc] initWithColor:[CPTColor colorWithCGColor:[NSColor colorWithRed:251 / 255. green:107 / 255. blue:92 / 255. alpha:1].CGColor]];
+    plot.areaFill = [[CPTFill alloc] initWithColor:[CPTColor colorWithCGColor:[self themeColor].CGColor]];
     plot.areaBaseValue = CPTDecimalFromString(@"0");
     plot.dataSource = self;
     
-    plot.areaFill2 = [[CPTFill alloc] initWithColor:[CPTColor colorWithCGColor:[NSColor colorWithRed:251 / 255. green:107 / 255. blue:92 / 255. alpha:1].CGColor]];
+    plot.areaFill2 = [[CPTFill alloc] initWithColor:[CPTColor colorWithCGColor:[self themeColor].CGColor]];
     plot.areaBaseValue2 = CPTDecimalFromString(@"0");
     
 //    CPTGradient *gradient = [CPTGradient gradientWithBeginningColor:
@@ -88,6 +88,10 @@
     [self.hostingView.layer addSublayer:self.indicatorLayer];
     
     self.plot = plot;
+}
+
+- (NSColor *)themeColor {
+    return [NSColor colorWithRed:251 / 255. green:107 / 255. blue:92 / 255. alpha:1];
 }
 
 #pragma mark - Plot Data Source Methods

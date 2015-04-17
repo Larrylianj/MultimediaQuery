@@ -26,6 +26,7 @@
 @property (nonatomic, readonly) NSString *motionScoreString;
 @property (nonatomic, readonly) NSString *audioScoreString;
 @property (nonatomic, readonly) NSString *previewVideoFilePath;
+@property (nonatomic, readonly) NSString *motionDebugPreviewVideoFilePath;
 
 // @property (nonatomic, readonly) NSString *audioFilePath;
 

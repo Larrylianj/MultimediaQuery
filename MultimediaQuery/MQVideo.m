@@ -20,6 +20,7 @@
 @property (nonatomic, readwrite) float audioScore;
 @property (nonatomic, readwrite) NSString *sourceFolderPath;
 @property (nonatomic, readwrite) NSString *previewVideoFileName;
+@property (nonatomic, readwrite) NSString *motionDebugPreviewVideoFileName;
 @property (nonatomic, readwrite) NSString *audioFileName;
 @property (nonatomic, readwrite) MQImageDescriptor *imageDescriptor;
 @property (nonatomic, readwrite) MQMotionDescriptor *motionDescriptor;
@@ -46,10 +47,19 @@
 }
 
 - (NSString *)previewVideoFilePath {
-    if (self.previewVideoFileName)
+    if (self.previewVideoFileName) {
         return [NSString stringWithFormat:@"%@/%@", self.sourceFolderPath, self.previewVideoFileName];
-    else
+    } else {
         return nil;
+    }
+}
+
+- (NSString *)motionDebugPreviewVideoFilePath {
+    if (self.motionDebugPreviewVideoFileName) {
+        return [NSString stringWithFormat:@"%@/%@", self.sourceFolderPath, self.motionDebugPreviewVideoFileName];
+    } else {
+        return nil;
+    }
 }
 
 + (MQVideo *)videoWithSourceFolderPath:(NSString *)path {
@@ -75,13 +85,19 @@
         self.previewVideoFileName = compliedVideoFileName;
     }
     
+    NSString *compliedMotionDebugVideoFileName = [NSString stringWithFormat:@"%@_compile_motion_debug.mov", self.name];
+    NSString *compliedMotionDebugVideoFilePath = [NSString stringWithFormat:@"%@/%@", self.sourceFolderPath, compliedMotionDebugVideoFileName];
+    if ([manager fileExistsAtPath:compliedMotionDebugVideoFilePath]) {
+        self.motionDebugPreviewVideoFileName = compliedMotionDebugVideoFileName;
+    }
+    
     NSString *imageDescriptorFileName = [NSString stringWithFormat:@"%@_image_descriptor.json", self.name];
     NSString *imageDescriptorFilePath = [NSString stringWithFormat:@"%@/%@", self.sourceFolderPath, imageDescriptorFileName];
     if ([manager fileExistsAtPath:imageDescriptorFilePath]) {
         self.imageDescriptor = [[MQImageDescriptor alloc] initWithJSONFilePath:imageDescriptorFilePath];
     }
     
-    NSString *motionDescriptorFileName = [NSString stringWithFormat:@"%@_motion_descriptor4.json", self.name];
+    NSString *motionDescriptorFileName = [NSString stringWithFormat:@"%@_motion_descriptor.json", self.name];
     NSString *motionDescriptorFilePath = [NSString stringWithFormat:@"%@/%@", self.sourceFolderPath, motionDescriptorFileName];
     if ([manager fileExistsAtPath:motionDescriptorFilePath]) {
         NSLog(@"name: %@", self.name);

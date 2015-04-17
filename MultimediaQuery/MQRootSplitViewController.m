@@ -29,6 +29,8 @@
     
     NSViewController *right = [self.splitViewItems[2] viewController];
     [right.view addConstraint:[NSLayoutConstraint constraintWithItem:right.view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:400]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:288 * 2]];
 }
 
 @end

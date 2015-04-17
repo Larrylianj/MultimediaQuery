@@ -13,7 +13,6 @@
     unsigned long _size;
 }
 
-@property (nonatomic, assign) CGPoint avgVector;
 @property (nonatomic, assign) float movementPercentage;
 
 @end
@@ -30,7 +29,6 @@
         _vectors = malloc(data.length);
         _size = data.length / sizeof(CGPoint);
         memcpy(_vectors, data.bytes, data.length);
-        [self configureAvgVector];
         [self configureMovementPercentage];
     }
     return self;
@@ -46,7 +44,6 @@
             NSArray *vecArray = array[i];
             _vectors[i] = CGPointMake([vecArray[0] integerValue], [vecArray[1] integerValue]);
         }
-        [self configureAvgVector];
         [self configureMovementPercentage];
     }
     return self;
@@ -54,6 +51,17 @@
 
 - (void)dealloc {
     free(_vectors);
+}
+
+- (NSString *)description {
+    NSMutableString *result = [NSMutableString string];
+    for (int i = 0; i < _size; i++) {
+        CGPoint vector = _vectors[i];
+        if ([MQMotionSignature detectVectorMovement:vector]) {
+            [result appendFormat:@"(%@, %@) ", @(i), NSStringFromPoint(vector)];
+        }
+    }
+    return result;
 }
 
 - (NSArray *)JSONPresentation {
@@ -64,18 +72,6 @@
     return array;
 }
 
-- (void)configureAvgVector {
-    return;
-    CGFloat x = 0, y = 0;
-    for (int i = 0; i < _size; i++) {
-        CGPoint vec = _vectors[i];
-        x += vec.x;
-        y += vec.y;
-    }
-    self.avgVector = CGPointMake(x / _size, y / _size);
-    // NSLog(@"x: %@, y: %@, avg: %@, %@", @(x), @(y), NSStringFromPoint(self.avgVector), @(_size));
-}
-
 - (CGPoint *)vectors {
     return _vectors;
 }
@@ -84,7 +80,7 @@
     float count = 0;
     for (int i = 0; i < _size; i++) {
         CGPoint p = _vectors[i];
-        if (fabs(p.x) + fabs(p.y) > 32) {
+        if ([MQMotionSignature detectVectorMovement:p]) {
             count++;
         }
     }
@@ -96,6 +92,18 @@
     if (larger == 0) return 0;
     float diff = 1 - MIN(self.movementPercentage, sig.movementPercentage) / larger;
     return diff;
+}
+
+- (BOOL)detectedMovementForPixelIndex:(int)idx {
+    int x = idx % 352;
+    int y = idx / 352;
+    int blockIdx = (y / 16) * 22 + (x / 16);
+    CGPoint vector = _vectors[blockIdx];
+    return [MQMotionSignature detectVectorMovement:vector];
+}
+
++ (BOOL)detectVectorMovement:(CGPoint)vector {
+    return fabs(vector.x) + fabs(vector.y) >= 8;
 }
 
 @end

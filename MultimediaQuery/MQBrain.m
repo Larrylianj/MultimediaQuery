@@ -12,6 +12,7 @@
 #import "MQImageDescriptorGenerator.h"
 #import "MQMotionDescriptorGenerator.h"
 #import "NSNotificationCenter+Helper.h"
+#import "MQMotionDebugVideoGenerator.h"
 
 @interface MQBrain ()
 
@@ -24,6 +25,7 @@ typedef void (^QueryVideoSetupHandler)(void);
 @property (atomic, assign) NSInteger queryTaskCount;
 @property (nonatomic, readonly) CGSize imageSize;
 @property (nonatomic, copy) QueryVideoSetupHandler queryVideoSetupHandler;
+@property (nonatomic, readonly) NSInteger videoFrameRate;
 
 @end
 
@@ -119,6 +121,14 @@ typedef void (^QueryVideoSetupHandler)(void);
     return [MQVideo videoWithSourceFolderPath:self.queryFolderPath];
 }
 
+- (BOOL)motionDebugMode {
+    return YES;
+}
+
+- (NSInteger)videoFrameRate {
+    return 30;
+}
+
 #pragma mark - Logic
 
 - (void)reportRootSetupTaskFinished {
@@ -191,7 +201,27 @@ typedef void (^QueryVideoSetupHandler)(void);
             }
             [self finishSetupTask:query];
         }];
+    } else if (self.motionDebugMode && !video.motionDebugPreviewVideoFilePath) {
+        [self addSetupTask:query];
+        [self createMotionDebugPreviewVideoAtFolderPath:path completion:^(NSError *error) {
+            if (!error) {
+                [video setup];
+            }
+            [self finishSetupTask:query];
+        }];
     }
+}
+
+- (void)createMotionDebugPreviewVideoAtFolderPath:(NSString *)path completion:(void (^)(NSError *))handler {
+    MQVideo *video = [MQVideo videoWithSourceFolderPath:path];
+    MQMotionDescriptor *descriptor = video.motionDescriptor;
+    MQMotionDebugVideoGenerator *generator = [[MQMotionDebugVideoGenerator alloc] initWithSourceFolderPath:path imageSize:self.imageSize frameRate:self.videoFrameRate motionDescriptor:descriptor];
+    [generator generateAsynchronouslyWithCompletionHandler:^(NSError *error) {
+        if (error) {
+            NSLog(@"createMotionDebugPreviewVideoAtFolderPath: %@, error: %@", path, error.localizedDescription);
+        }
+        handler(error);
+    }];
 }
 
 - (void)createMotionDescriptorAtFolderPath:(NSString *)path completion:(void (^)(NSError *))handler {
@@ -200,7 +230,13 @@ typedef void (^QueryVideoSetupHandler)(void);
         if (error) {
             NSLog(@"createMotionDescriptorAtFolderPath: %@, error: %@", path, error.localizedDescription);
         }
-        handler(error);
+        MQVideo *video = [MQVideo videoWithSourceFolderPath:path];
+        [video setup];
+        if (!error && self.motionDebugMode && !video.motionDebugPreviewVideoFilePath) {
+            [self createMotionDebugPreviewVideoAtFolderPath:path completion:handler];
+        } else {
+            handler(error);
+        }
     }];
 }
 
@@ -215,7 +251,7 @@ typedef void (^QueryVideoSetupHandler)(void);
 }
 
 - (void)createPreviewVideoAtFolderPath:(NSString *)path completion:(void (^)(NSError *))handler {
-    MQVideoGenerator *generator = [[MQVideoGenerator alloc] initWithSourceFolderPath:path imageSize:self.imageSize frameRate:30];
+    MQVideoGenerator *generator = [[MQVideoGenerator alloc] initWithSourceFolderPath:path imageSize:self.imageSize frameRate:self.videoFrameRate];
     [generator generateAsynchronouslyWithCompletionHandler:^(NSError *error) {
         if (error) {
             NSLog(@"createPreviewVideoAtFolderPath: %@, error: %@", path, error.localizedDescription);

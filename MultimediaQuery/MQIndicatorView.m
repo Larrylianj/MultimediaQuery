@@ -33,14 +33,16 @@
     CGContextSetFillColorWithColor(ctx, _lineColor.CGColor);
     CGContextFillRect(ctx, CGRectMake(0, 0, 1, self.bounds.size.height));
     
-    CGFloat x = floor(self.bounds.size.width * self.maxIndicatorX);
+    CGFloat x = floor(self.bounds.size.width * self.maxIndicatorX) - 1;
+    x = MAX(MIN(x, self.bounds.size.width - 2), 0);
     CGContextSetFillColorWithColor(ctx, _maxIndicatorColor.CGColor);
-    CGContextFillRect(ctx, CGRectMake(x - 1, 0, 2, self.bounds.size.height));
+    CGContextFillRect(ctx, CGRectMake(x - 1 > 0 ? x - 1 : 0, 0, 2, self.bounds.size.height));
     
     x = floor(self.bounds.size.width * self.percentagePoint.x);
+    x = MAX(MIN(x, self.bounds.size.width - 2), 0);
     // CGFloat y = floor(self.bounds.size.height * self.percentagePoint.y);
     CGContextSetFillColorWithColor(ctx, _indicatorColor.CGColor);
-    CGContextFillRect(ctx, CGRectMake(x - 1, 0, 2, self.bounds.size.height));
+    CGContextFillRect(ctx, CGRectMake(x, 0, 2, self.bounds.size.height));
 }
 
 - (void)setPercentagePoint:(CGPoint)percentagePoint {

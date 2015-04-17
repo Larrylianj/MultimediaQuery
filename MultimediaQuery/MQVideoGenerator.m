@@ -14,9 +14,7 @@
     uint32_t* _argb;
 }
 
-@property (nonatomic, copy) NSString *sourceFolderPath;
-
-@property (nonatomic, assign) CGSize imageSize;
+@property (nonatomic, readwrite) NSString *sourceFolderPath;
 
 @property (nonatomic, readonly) NSString *targetVideoFileName;
 
@@ -36,6 +34,10 @@
 
 @property (nonatomic, strong) AVAssetExportSession *assetExport;
 
+@property (nonatomic, assign) CGSize imageSize;
+
+@property (nonatomic, assign) int imageArea;
+
 @end
 
 @implementation MQVideoGenerator
@@ -54,22 +56,31 @@
     return self;
 }
 
+- (void)setImageSize:(CGSize)imageSize {
+    if (!CGSizeEqualToSize(_imageSize, imageSize)) {
+        _imageSize = imageSize;
+        self.imageArea = (int)self.imageSize.width * (int)self.imageSize.height;
+    }
+}
+
 - (void)dealloc {
     free(_argb);
 }
 
-- (CVPixelBufferRef)imageBufferRefAtFileURL:(NSURL *)url bufferPool:(CVPixelBufferPoolRef)pool {
+- (uint32_t)pixelForFrame:(int)frame atIndex:(int)idx rgb:(unsigned char *)rgb {
+    uint32_t r = rgb[idx] & 0xff;
+    uint32_t g = rgb[idx + self.imageArea] & 0xff;
+    uint32_t b = rgb[idx + self.imageArea * 2] & 0xff;
+    uint32_t pix = 0xff | (b << 24) | (g << 16) | (r << 8);
+    return pix;
+}
+
+- (CVPixelBufferRef)imageBufferRefAtFileURL:(NSURL *)url frame:(int)frame bufferPool:(CVPixelBufferPoolRef)pool {
     NSData *data = [NSData dataWithContentsOfURL:url];
     unsigned char *rgb = (unsigned char *)[data bytes];
-    int area = (int)self.imageSize.width * (int)self.imageSize.height;
-    
-    for (int idx = 0; idx < area; idx++) {
-        uint32_t r = rgb[idx] & 0xff;
-        uint32_t g = rgb[idx + area] & 0xff;
-        uint32_t b = rgb[idx + area * 2] & 0xff;
-        uint32_t pix = 0xFF | (b << 24) | (g << 16) | (r << 8);
+    for (int idx = 0; idx < self.imageArea; idx++) {
+        uint32_t pix = [self pixelForFrame:frame atIndex:idx rgb:rgb];
         _argb[idx] = pix;
-        // NSLog(@"%d, %d, %d, %d", r, g, b, pix);
     }
 
     CGContextRef imageContext = (CGContextRef)CFAutorelease(CGBitmapContextCreate(_argb,
@@ -224,7 +235,7 @@
         CVPixelBufferPoolRef bufferPool = adaptor.pixelBufferPool;
         NSParameterAssert(bufferPool != NULL);
         
-        buffer = [self imageBufferRefAtFileURL:fileURL bufferPool:adaptor.pixelBufferPool];
+        buffer = [self imageBufferRefAtFileURL:fileURL frame:frameCount bufferPool:adaptor.pixelBufferPool];
         
         BOOL appendSucceed = NO;
         int j = 0;

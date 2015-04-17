@@ -44,10 +44,10 @@
         [self appendMotionSignature:sig];
     }
     
-    for (MQMotionSignature *sig in self.motionSignatures) {
-        printf("%f, ", sig.movementPercentage);
-    }
-    printf("\n");
+//    for (MQMotionSignature *sig in self.motionSignatures) {
+//        printf("%f, ", sig.movementPercentage);
+//    }
+//    printf("\n");
 }
 
 - (void)updateWithQueryVideoMotionDescriptor:(MQMotionDescriptor *)query {
@@ -71,6 +71,13 @@
     
     [matchingScroes addObject:@(0)];
     _matchingScores = matchingScroes;
+}
+
+- (BOOL)detectedMovementAtFrame:(int)frame pixelIndex:(int)idx {
+    if (frame <= 0) return NO;
+    // This is just for the images provided
+    MQMotionSignature *sig = self.motionSignatures[frame - 1];
+    return [sig detectedMovementForPixelIndex:idx];
 }
 
 @end

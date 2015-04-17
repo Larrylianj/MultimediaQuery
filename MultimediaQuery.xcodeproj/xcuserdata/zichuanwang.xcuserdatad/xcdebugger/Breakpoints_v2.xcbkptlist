@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MultimediaQuery/MQDescriptorViewController.m"
-            timestampString = "450765738.659461"
+            timestampString = "450874682.518552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "-setupCoreplotViews"
             landmarkType = "5">
          </BreakpointContent>

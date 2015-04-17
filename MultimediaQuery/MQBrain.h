@@ -13,7 +13,10 @@
 @interface MQBrain : NSObject
 
 @property (nonatomic, strong, readonly) NSMutableDictionary *videoStore;
+
 @property (nonatomic, readonly) MQVideo *queryVideo;
+
+@property (nonatomic, readonly) BOOL motionDebugMode;
 
 + (instancetype)sharedInstance;
 

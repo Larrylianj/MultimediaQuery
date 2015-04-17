@@ -30,7 +30,7 @@
 #pragma mark - Methods to Overwrite
 
 - (NSString *)targetJSONFileName {
-    return [NSString stringWithFormat:@"%@_motion_descriptor4.json", self.sourceFolderPath.lastPathComponent];
+    return [NSString stringWithFormat:@"%@_motion_descriptor.json", self.sourceFolderPath.lastPathComponent];
 }
 
 - (void)dealloc {
@@ -86,7 +86,7 @@
         int width = (int)self.imageSize.width;
         int height = (int)self.imageSize.height;
         
-        // Calculate each level RGB by downsizing previous levev's RGB by 2
+        // Calculate each level RGB by downsizing previous level's RGB by 2
         for (int i = 1; i < 4; i++) {
             width /= 2;
             height /= 2;
@@ -142,7 +142,7 @@
         if (![fileURL.pathExtension.lowercaseString isEqualToString:@"rgb"]) {
             continue;
         }
-        // NSLog(@"file name: %@", fileURL.absoluteString);
+        NSLog(@"file name: %@", fileURL.absoluteString);
         NSData *data = [NSData dataWithContentsOfURL:fileURL];
         
         // Configure curr data
@@ -187,7 +187,7 @@
         diff += abs(prgb[i] - crgb[i]);
     }
     // NSLog(@"px: %@, py: %@, cx: %@, cy: %@, lvl: %@, diff: %@", @(px), @(py), @(cx), @(cy), @(lvl), @(diff));
-    return diff;
+    return diff / 3;
 }
 
 - (CGPoint)hierarchicalSearchMotionVectorForBlockAtRow:(int)row
@@ -204,8 +204,22 @@
     int currX = column * blockWidth;
     int currY = row * blockHeight;
     
+    if (lvl == 0) {
+        int32_t originalDiff = 0;
+        for (int m = 0; m < blockHeight; m++) {
+            for (int n = 0; n < blockWidth; n++) {
+                int32_t diff = [self differenceBetweenPrevFrameAtX:currX + n prevY:currY + m withCurrentFrameAtX:currX + n currY:currY + m level:lvl];
+                originalDiff += diff;
+            }
+        }
+        if (originalDiff / blockHeight / blockWidth < 2) {
+            // NSLog(@"(%@, %@), %@", @(row), @(column), @(originalDiff));
+            return CGPointMake(currX, currY);
+        }
+    }
+    
     CGPoint ret = CGPointZero;
-    int32_t maxDiff = INT32_MAX;
+    int32_t minDiff = INT32_MAX;
     
     if (lvl == 3) {
         for (int i = MAX(currY - k, 0); i <= MIN(currY + k, height - blockHeight - 1); i++) {
@@ -213,20 +227,17 @@
                 int32_t currDiff = 0;
                 for (int m = 0; m < blockHeight; m++) {
                     for (int n = 0; n < blockWidth; n++) {
-                        currDiff += [self differenceBetweenPrevFrameAtX:j + n prevY:i + m withCurrentFrameAtX:currX currY:currY level:lvl];
+                        currDiff += [self differenceBetweenPrevFrameAtX:j + n prevY:i + m withCurrentFrameAtX:currX + n currY:currY + m level:lvl];
                     }
                 }
-                if (currDiff < maxDiff || (i == currY && j == currX && abs(currDiff - maxDiff) < 30)) {
-                    maxDiff = currDiff;
+                if (currDiff < minDiff) {
+                    minDiff = currDiff;
                     ret = CGPointMake(j, i);
                 }
             }
         }
     } else {
-        CGPoint target = [self hierarchicalSearchMotionVectorForBlockAtRow:row
-                                                         column:column
-                                                candidateLength:k / 2
-                                                          level:lvl + 1];
+        CGPoint target = [self hierarchicalSearchMotionVectorForBlockAtRow:row column:column candidateLength:k / 2 level:lvl + 1];
         
         int targetX = target.x * 2;
         int targetY = target.y * 2;
@@ -236,11 +247,11 @@
                 int32_t currDiff = 0;
                 for (int m = 0; m < blockHeight; m++) {
                     for (int n = 0; n < blockWidth; n++) {
-                        currDiff += [self differenceBetweenPrevFrameAtX:targetX + j + n prevY:targetY + i + m withCurrentFrameAtX:currX currY:currY level:lvl];
+                        currDiff += [self differenceBetweenPrevFrameAtX:targetX + j + n prevY:targetY + i + m withCurrentFrameAtX:currX + n currY:currY + m level:lvl];
                     }
                 }
-                if (currDiff < maxDiff) {
-                    maxDiff = currDiff;
+                if (currDiff < minDiff) {
+                    minDiff = currDiff;
                     ret = CGPointMake(targetX + j, targetY + i);
                 }
             }
@@ -260,7 +271,9 @@
     
     CGPoint ret = [self hierarchicalSearchMotionVectorForBlockAtRow:row column:column candidateLength:k level:0];
     ret = CGPointMake(x - ret.x, y - ret.y);
-    // NSLog(@"row: %@, column: %@, ret: %@", @(row), @(column), NSStringFromPoint(ret));
+//    if (abs(ret.x) + abs(ret.y) > 16) {
+//        NSLog(@"row: %@, column: %@, ret: %@", @(row), @(column), NSStringFromPoint(ret));
+//    }
     return ret;
 }
 
@@ -275,7 +288,7 @@
     
     NSData *sigData = [[NSData alloc] initWithBytes:_vectors length:self.vectorSize * sizeof(CGPoint)];
     MQMotionSignature *sig = [[MQMotionSignature alloc] initWithData:sigData];
-    // NSLog(@"sig: %@", sig.JSONPresentation);
+    // NSLog(@"sig: %@", sig);
     
     return sig;
 }

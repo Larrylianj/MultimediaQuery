@@ -12,8 +12,16 @@
     
 }
 
+@property (nonatomic, readonly) CGSize imageSize;
+
+@property (nonatomic, readonly) int imageArea;
+
+@property (nonatomic, copy, readonly) NSString *sourceFolderPath;
+
 - (id)initWithSourceFolderPath:(NSString *)path imageSize:(CGSize)size frameRate:(NSInteger)rate;
 
 - (void)generateAsynchronouslyWithCompletionHandler:(void (^)(NSError *))handler;
+
+- (uint32_t)pixelForFrame:(int)frame atIndex:(int)idx rgb:(unsigned char *)rgb;
 
 @end

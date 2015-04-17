@@ -8,6 +8,7 @@
 
 #import "MQVideoPreviewController.h"
 #import "MQVideo.h"
+#import "MQBrain.h"
 
 @interface MQVideoPreviewController ()
 
@@ -21,7 +22,8 @@
 }
 
 - (void)setPreviewVideo:(MQVideo *)video {
-    NSURL *fileURL = [NSURL fileURLWithPath:video.previewVideoFilePath];
+    NSString *path = [MQBrain sharedInstance].motionDebugMode ? video.motionDebugPreviewVideoFilePath : video.previewVideoFilePath;
+    NSURL *fileURL = [NSURL fileURLWithPath:path];
     AVPlayerItem *playItem = [AVPlayerItem playerItemWithURL:fileURL];
     if (!self.playerView.player) {
         AVPlayer *player = [AVPlayer playerWithPlayerItem:playItem];

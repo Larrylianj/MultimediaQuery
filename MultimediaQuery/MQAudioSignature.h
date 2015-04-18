@@ -12,7 +12,7 @@
 
 @property (nonatomic, readonly) NSArray *JSONPresentation;
 
-- (id)initWithData:(Float32[16])data;
+- (id)initWithData:(Float32 *)data;
 
 - (id)initWithJSONArray:(NSArray *)array;
 

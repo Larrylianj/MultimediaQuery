@@ -10,14 +10,14 @@
 // #import <AudioToolbox/AudioToolbox.h>
 #import "MQAudioDescriptor.h"
 #import "MQAudioSignature.h"
-#include <Accelerate/Accelerate.h>
+#import <Accelerate/Accelerate.h>
 
 const UInt32 numberOfChannels = 2;
 const UInt32 sampleRate = 44100;
 const UInt32 frameRate = 30;
 const UInt32 maxSampleCount = 1024;
 const UInt32 outputCount = maxSampleCount / 2;
-const UInt32 quantizeBucketSize = outputCount / 16;
+const UInt32 quantizeBucketSize = outputCount / 32;
 
 const Float32 kAdjust0DB = 1.5849e-13;
 
@@ -30,7 +30,7 @@ const Float32 kAdjust0DB = 1.5849e-13;
     Float32             mFFTNormFactor;
     UInt32              mFFTLength;
     vDSP_Length         mLog2N;
-    Float32             quantizedResult[16];
+    Float32             quantizedResult[32];
 }
 
 @end
@@ -42,10 +42,10 @@ const Float32 kAdjust0DB = 1.5849e-13;
 - (id)initWithSourceFolderPath:(NSString *)path {
     self = [super initWithSourceFolderPath:path];
     if (self) {
-        mFFTNormFactor = 1.0/ (2 * maxSampleCount);
+        mFFTNormFactor = 1.0 / (2 * maxSampleCount);
         mFFTLength = outputCount;
-        mLog2N = log2f(maxSampleCount);
-        mDspSplitComplex.realp = (Float32 *)calloc(mFFTLength,sizeof(Float32));
+        mLog2N = ceil(log2f(maxSampleCount));
+        mDspSplitComplex.realp = (Float32 *)calloc(mFFTLength, sizeof(Float32));
         mDspSplitComplex.imagp = (Float32 *)calloc(mFFTLength, sizeof(Float32));
         mSpectrumAnalysis = vDSP_create_fftsetup(mLog2N, kFFTRadix2);
     }
@@ -124,16 +124,17 @@ const Float32 kAdjust0DB = 1.5849e-13;
 - (MQAudioSignature *)audioSignatureForWavechunk:(short *)chunk numberOfSamples:(NSUInteger)numberOfSamples {
     
     // Setup the length
-    memset(quantizedResult, 0, 16 * sizeof(Float32));
+    memset(quantizedResult, 0, 32 * sizeof(Float32));
     for (int chnl = 0; chnl < numberOfChannels; chnl++) {
         for (int i = 0; i < MIN(numberOfSamples, maxSampleCount); i++) {
-            inAudioData[i] = (float)chunk[i * 2 + chnl];
+            inAudioData[i] = (Float32)chunk[i * 2 + chnl] / 32768;
         }
         [self computeFFT];
         for (int i = 0; i < outputCount; i++) {
             int idx = i / quantizeBucketSize;
             quantizedResult[idx] += (outFFTData[i] + 128) / 256 / quantizeBucketSize / numberOfChannels;
-            NSLog(@"idx: %@, i: %@, v: %@", @(idx), @(i), @(outFFTData[i]));
+
+            // NSLog(@"idx: %@, i: %@, v: %@", @(idx), @(i), @(outFFTData[i]));
         }
     }
     MQAudioSignature *sig = [[MQAudioSignature alloc] initWithData:quantizedResult];
@@ -146,7 +147,6 @@ const Float32 kAdjust0DB = 1.5849e-13;
     MQAudioDescriptor *descriptor = [[MQAudioDescriptor alloc] init];
     
     NSData *data = [NSData dataWithContentsOfURL:url];
-    // NSLog(@"data length: %@", @(data.length));
     // WAV header is 44 bytes long
     short *waveChunks = (short *)data.bytes + 22;
     UInt32 chunkLength = (UInt32)(data.length - 44) / 2;

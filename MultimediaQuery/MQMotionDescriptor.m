@@ -49,7 +49,7 @@
     NSUInteger m = self.motionSignatures.count;
     NSUInteger n = query.motionSignatures.count;
     
-    NSMutableArray *matchingScroes = [[NSMutableArray alloc] initWithCapacity:self.motionSignatures.count];
+    NSMutableArray *matchingScroes = [NSMutableArray arrayWithCapacity:self.motionSignatures.count];
     
 
     for (NSUInteger i = 0; i < m; i++) {

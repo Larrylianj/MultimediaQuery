@@ -49,6 +49,7 @@
 - (void)handleTableViewSelection {
     if (self.tableView.numberOfSelectedRows == 0) return;
     MQVideo *video = self.queryResults[self.tableView.selectedRow];
+    NSLog(@"%@", video.sourceFolderPath);
     AppDelegate *delegate = [NSApplication sharedApplication].delegate;
     [delegate.sourcePreviewController setPreviewVideo:video];
     

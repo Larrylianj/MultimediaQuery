@@ -37,6 +37,7 @@
 		98853E921ADA46DF008015A2 /* MQImageBasedDescriptorGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 98853E911ADA46DF008015A2 /* MQImageBasedDescriptorGenerator.m */; };
 		98853E951ADA486E008015A2 /* MQBaseDescriptorGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 98853E941ADA486E008015A2 /* MQBaseDescriptorGenerator.m */; };
 		98936C4D1AE2523500FE6350 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98936C4C1AE2523500FE6350 /* Accelerate.framework */; };
+		98936C501AE279C300FE6350 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98936C4F1AE279C300FE6350 /* CoreAudio.framework */; };
 		98D0A20A1AD49D910040DE9C /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D0A2091AD49D910040DE9C /* AVKit.framework */; };
 		98D0A2101AD4B49A0040DE9C /* MQVideoGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D0A20F1AD4B49A0040DE9C /* MQVideoGenerator.m */; };
 		98D0A2121AD4B4D40040DE9C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D0A2111AD4B4D40040DE9C /* AVFoundation.framework */; };
@@ -129,6 +130,7 @@
 		98853E931ADA486E008015A2 /* MQBaseDescriptorGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQBaseDescriptorGenerator.h; sourceTree = "<group>"; };
 		98853E941ADA486E008015A2 /* MQBaseDescriptorGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQBaseDescriptorGenerator.m; sourceTree = "<group>"; };
 		98936C4C1AE2523500FE6350 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		98936C4F1AE279C300FE6350 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		98D0A2091AD49D910040DE9C /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		98D0A20E1AD4B49A0040DE9C /* MQVideoGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQVideoGenerator.h; sourceTree = "<group>"; };
 		98D0A20F1AD4B49A0040DE9C /* MQVideoGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQVideoGenerator.m; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98936C501AE279C300FE6350 /* CoreAudio.framework in Frameworks */,
 				98936C4D1AE2523500FE6350 /* Accelerate.framework in Frameworks */,
 				9849E1EB1AE1E606005DE333 /* AudioToolbox.framework in Frameworks */,
 				987FCB061AD765F5009BBDF7 /* CorePlot.framework in Frameworks */,
@@ -279,6 +282,7 @@
 		987FCB021AD75FBD009BBDF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				98936C4F1AE279C300FE6350 /* CoreAudio.framework */,
 				98936C4C1AE2523500FE6350 /* Accelerate.framework */,
 				9849E1EA1AE1E606005DE333 /* AudioToolbox.framework */,
 				987FCB051AD765F5009BBDF7 /* CorePlot.framework */,

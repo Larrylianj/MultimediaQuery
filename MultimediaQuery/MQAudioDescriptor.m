@@ -66,7 +66,6 @@
         MQAudioSignature *sig = [[MQAudioSignature alloc] initWithJSONArray:sigArr];
         [self appendAudioSignature:sig];
     }
-    NSLog(@"ok: %@", [self.audioSignatures[0] JSONPresentation]);
 }
 
 @end

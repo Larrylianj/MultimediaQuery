@@ -31,7 +31,12 @@
 - (void)setVideo:(MQVideo *)video {
     if (_dataForPlot.count == 0) return;
     self.maxMatchingIndex = video.maxTotalScoreIndex;
-    if (!self.plot) [self setupCoreplotViews];
+    if (!self.plot) {
+        [self setupCoreplotViews];
+    } else {
+        CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.graph.defaultPlotSpace;
+        plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromFloat(_dataForPlot.count - 1)];
+    }
     [self updateIndicatorLayer];
     [self.plot reloadData];
 }
@@ -46,7 +51,6 @@
 }
 
 - (void)updateIndicatorLayer {
-    self.indicatorLayer.percentagePoint = CGPointMake(-100, -100);
     self.indicatorLayer.maxIndicatorX = (CGFloat)self.maxMatchingIndex / _dataForPlot.count;
     [self.indicatorLayer setNeedsDisplay];
 }

@@ -15,7 +15,7 @@
 #import "NSNotificationCenter+Helper.h"
 #import "MQMotionDebugVideoGenerator.h"
 
-#define SETUP_DEBUG 1
+// #define SETUP_DEBUG 1
 
 @interface MQBrain ()
 

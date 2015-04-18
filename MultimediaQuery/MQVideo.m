@@ -10,6 +10,7 @@
 #import "MQBrain.h"
 #import "MQImageDescriptor.h"
 #import "MQMotionDescriptor.h"
+#import "MQAudioDescriptor.h"
 
 @interface MQVideo ()
 
@@ -24,6 +25,7 @@
 @property (nonatomic, readwrite) NSString *audioFileName;
 @property (nonatomic, readwrite) MQImageDescriptor *imageDescriptor;
 @property (nonatomic, readwrite) MQMotionDescriptor *motionDescriptor;
+@property (nonatomic, readwrite) MQAudioDescriptor *audioDescriptor;
 @property (nonatomic, readwrite) NSUInteger maxTotalScoreIndex;
 
 @end
@@ -100,24 +102,32 @@
     NSString *motionDescriptorFileName = [NSString stringWithFormat:@"%@_motion_descriptor.json", self.name];
     NSString *motionDescriptorFilePath = [NSString stringWithFormat:@"%@/%@", self.sourceFolderPath, motionDescriptorFileName];
     if ([manager fileExistsAtPath:motionDescriptorFilePath]) {
-        NSLog(@"name: %@", self.name);
         self.motionDescriptor = [[MQMotionDescriptor alloc] initWithJSONFilePath:motionDescriptorFilePath];
+    }
+    
+    NSString *audioDescriptorFileName = [NSString stringWithFormat:@"%@_audio_descriptor.json", self.name];
+    NSString *audioDescriptorFilePath = [NSString stringWithFormat:@"%@/%@", self.sourceFolderPath, audioDescriptorFileName];
+    if ([manager fileExistsAtPath:audioDescriptorFilePath]) {
+        self.audioDescriptor = [[MQAudioDescriptor alloc] initWithJSONFilePath:audioDescriptorFilePath];
     }
 }
 
 - (void)updateDescriptorsWithQueryVideo:(MQVideo *)video {
-    [self.motionDescriptor updateWithQueryVideoMotionDescriptor:video.motionDescriptor];
     [self.imageDescriptor updateWithQueryVideoImageDescriptor:video.imageDescriptor];
+    [self.motionDescriptor updateWithQueryVideoMotionDescriptor:video.motionDescriptor];
+    [self.audioDescriptor updateWithQueryVideoAudioDescriptor:video.audioDescriptor];
     
     self.totalScore = 0;
     for (NSUInteger i = 0; i < self.imageDescriptor.matchingScores.count; i++) {
         float imageScore = [self.imageDescriptor.matchingScores[i] floatValue];
         float motionScore = [self.motionDescriptor.matchingScores[i] floatValue];
-        float totalScore = imageScore * 0.6 + motionScore * 0.4;
+        float audioScore = [self.audioDescriptor.matchingScores[i] floatValue];
+        float totalScore = imageScore * 0.5 + motionScore * 0.3 + audioScore * 0.2;
         if (totalScore > self.totalScore) {
             self.totalScore = totalScore;
             self.imageScore = imageScore;
             self.motionScore = motionScore;
+            self.audioScore = audioScore;
             self.maxTotalScoreIndex = i;
         }
     }

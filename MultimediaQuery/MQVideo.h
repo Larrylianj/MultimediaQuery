@@ -10,6 +10,7 @@
 
 @class MQImageDescriptor;
 @class MQMotionDescriptor;
+@class MQAudioDescriptor;
 
 @interface MQVideo : NSObject
 
@@ -32,6 +33,7 @@
 
 @property (nonatomic, strong, readonly) MQImageDescriptor *imageDescriptor;
 @property (nonatomic, strong, readonly) MQMotionDescriptor *motionDescriptor;
+@property (nonatomic, strong, readonly) MQAudioDescriptor *audioDescriptor;
 
 + (MQVideo *)videoWithSourceFolderPath:(NSString *)path;
 

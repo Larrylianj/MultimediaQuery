@@ -1068,10 +1068,10 @@
             </objects>
             <point key="canvasLocation" x="1814" y="1246"/>
         </scene>
-        <!--Image Descriptor View Controller-->
+        <!--Audio Descriptor Controller-->
         <scene sceneID="l7z-EU-ggY">
             <objects>
-                <viewController id="YmR-Cj-7sh" customClass="MQImageDescriptorViewController" sceneMemberID="viewController">
+                <viewController id="YmR-Cj-7sh" customClass="MQAudioDescriptorController" sceneMemberID="viewController">
                     <view key="view" id="jhC-W1-ODw" customClass="MQBackgroundColorView">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>

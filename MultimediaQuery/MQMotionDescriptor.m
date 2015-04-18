@@ -43,11 +43,6 @@
         MQMotionSignature *sig = [[MQMotionSignature alloc] initWithJSONArray:sigArr];
         [self appendMotionSignature:sig];
     }
-    
-//    for (MQMotionSignature *sig in self.motionSignatures) {
-//        printf("%f, ", sig.movementPercentage);
-//    }
-//    printf("\n");
 }
 
 - (void)updateWithQueryVideoMotionDescriptor:(MQMotionDescriptor *)query {

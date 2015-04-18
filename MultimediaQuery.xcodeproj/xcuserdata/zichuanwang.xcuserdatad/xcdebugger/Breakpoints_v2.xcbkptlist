@@ -25,7 +25,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "92"
             endingLineNumber = "92"
-            landmarkName = "-setupCoreplotViews"
+            landmarkName = "-themeColor"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -35,46 +35,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MultimediaQuery/MQDescriptorViewController.m"
-            timestampString = "450765738.659461"
+            filePath = "MultimediaQuery/MQAudioDescriptorGenerator.m"
+            timestampString = "451045788.483055"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "-dealloc"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[MQDescriptorViewController viewDidLoad]"
-                  moduleName = "MultimediaQuery"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zichuanwang/Documents/github/MultimediaQuery/MultimediaQuery/MQDescriptorViewController.m"
-                  timestampString = "450676961.283546"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "41"
-                  endingLineNumber = "41"
-                  offsetFromSymbolStart = "79">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__41-[MQDescriptorViewController viewDidLoad]_block_invoke"
-                  moduleName = "MultimediaQuery"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zichuanwang/Documents/github/MultimediaQuery/MultimediaQuery/MQDescriptorViewController.m"
-                  timestampString = "450676961.283954"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "41"
-                  endingLineNumber = "41"
-                  offsetFromSymbolStart = "39">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

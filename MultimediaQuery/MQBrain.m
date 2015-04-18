@@ -11,8 +11,11 @@
 #import "MQVideoGenerator.h"
 #import "MQImageDescriptorGenerator.h"
 #import "MQMotionDescriptorGenerator.h"
+#import "MQAudioDescriptorGenerator.h"
 #import "NSNotificationCenter+Helper.h"
 #import "MQMotionDebugVideoGenerator.h"
+
+#define SETUP_DEBUG 1
 
 @interface MQBrain ()
 
@@ -43,7 +46,9 @@ typedef void (^QueryVideoSetupHandler)(void);
 - (void)setupWithRootFolderPath:(NSString *)path {
     self.rootFolderPath = path;
     NSArray *subFolderPaths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:nil];
-    // subFolderPaths = @[@"musicvideo"];
+#ifdef SETUP_DEBUG
+    subFolderPaths = @[@"musicvideo"];
+#endif
     for (NSString *subPath in subFolderPaths) {
         [self setupVideoAtFolderPath:[path stringByAppendingFormat:@"/%@", subPath] isQueryFile:NO];
     }
@@ -66,7 +71,9 @@ typedef void (^QueryVideoSetupHandler)(void);
         [self addSetupTask:YES];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSArray *array = self.videoStore.allValues;
-            // array = @[self.videoStore[@"/Users/zichuanwang/Downloads/source_data/musicvideo"]];
+#ifdef SETUP_DEBUG
+            array = @[self.videoStore[@"/Users/zichuanwang/Downloads/source_data/musicvideo"]];
+#endif
             for (MQVideo *video in array) {
                 if (video != self.queryVideo) {
                     [video updateDescriptorsWithQueryVideo:self.queryVideo];
@@ -87,9 +94,9 @@ typedef void (^QueryVideoSetupHandler)(void);
 - (NSArray *)queryResults {
     NSMutableArray *array = [NSMutableArray arrayWithArray:self.videoStore.allValues];
     [array removeObject:self.queryVideo];
-    
-    // array = [NSMutableArray arrayWithArray:@[self.videoStore[@"/Users/zichuanwang/Downloads/source_data/musicvideo"]]];
-    
+#ifdef SETUP_DEBUG
+    array = [NSMutableArray arrayWithArray:@[self.videoStore[@"/Users/zichuanwang/Downloads/source_data/musicvideo"]]];
+#endif
     [array sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         float a = [obj1 totalScore];
         float b = [obj2 totalScore];
@@ -169,12 +176,12 @@ typedef void (^QueryVideoSetupHandler)(void);
 }
 
 - (void)setupVideoAtFolderPath:(NSString *)path isQueryFile:(BOOL)query {
-    // NSLog(@"setupVideoAtFolderPath: %@, isQueryFile: %@", path, @(query));
     BOOL isDir;
     [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir];
     if (!isDir) return;
     
     MQVideo *video = [MQVideo videoWithSourceFolderPath:path];
+    // Setup Preview Video
     if (!video.previewVideoFilePath) {
         [self addSetupTask:query];
         [self createPreviewVideoAtFolderPath:path completion:^(NSError *error) {
@@ -184,6 +191,7 @@ typedef void (^QueryVideoSetupHandler)(void);
             [self finishSetupTask:query];
         }];
     }
+    // Setup Image Descriptor
     if (!video.imageDescriptor) {
         [self addSetupTask:query];
         [self createImageDescriptorAtFolderPath:path completion:^(NSError *error) {
@@ -193,6 +201,7 @@ typedef void (^QueryVideoSetupHandler)(void);
             [self finishSetupTask:query];
         }];
     }
+    // Setup Motion Descriptor and Motion Debug Preview Video
     if (!video.motionDescriptor) {
         [self addSetupTask:query];
         [self createMotionDescriptorAtFolderPath:path completion:^(NSError *error) {
@@ -210,6 +219,16 @@ typedef void (^QueryVideoSetupHandler)(void);
             [self finishSetupTask:query];
         }];
     }
+    // Setup Audio Descriptor
+    if (!video.audioDescriptor) {
+        [self addSetupTask:query];
+        [self createAudioDescriptorAtFolderPath:path completion:^(NSError *error) {
+            if (!error) {
+                [video setup];
+            }
+            [self finishSetupTask:query];
+        }];
+    }
 }
 
 - (void)createMotionDebugPreviewVideoAtFolderPath:(NSString *)path completion:(void (^)(NSError *))handler {
@@ -219,6 +238,16 @@ typedef void (^QueryVideoSetupHandler)(void);
     [generator generateAsynchronouslyWithCompletionHandler:^(NSError *error) {
         if (error) {
             NSLog(@"createMotionDebugPreviewVideoAtFolderPath: %@, error: %@", path, error.localizedDescription);
+        }
+        handler(error);
+    }];
+}
+
+- (void)createAudioDescriptorAtFolderPath:(NSString *)path completion:(void (^)(NSError *))handler {
+    MQAudioDescriptorGenerator *generator = [[MQAudioDescriptorGenerator alloc] initWithSourceFolderPath:path];
+    [generator generateAsynchronouslyWithCompletionHandler:^(NSError *error) {
+        if (error) {
+            NSLog(@"createAudioDescriptorAtFolderPath: %@, error: %@", path, error.localizedDescription);
         }
         handler(error);
     }];

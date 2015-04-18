@@ -55,6 +55,7 @@
     if ([MQBrain sharedInstance].queryVideo) {
         [delegate.imageDescriptorController setVideo:video];
         [delegate.motionDescriptorController setVideo:video];
+        [delegate.audioDescriptorController setVideo:video];
     }
 }
 

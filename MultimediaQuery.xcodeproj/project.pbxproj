@@ -13,6 +13,11 @@
 		9809D8111AD4896C0086C25B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9809D80F1AD4896C0086C25B /* Main.storyboard */; };
 		9809D81D1AD4896C0086C25B /* MultimediaQueryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9809D81C1AD4896C0086C25B /* MultimediaQueryTests.m */; };
 		9849E1DD1ADF2569005DE333 /* MQMotionDebugVideoGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9849E1DC1ADF2569005DE333 /* MQMotionDebugVideoGenerator.m */; };
+		9849E1E01AE1067B005DE333 /* MQAudioDescriptorGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9849E1DF1AE1067A005DE333 /* MQAudioDescriptorGenerator.m */; };
+		9849E1E31AE1069C005DE333 /* MQAudioDescriptorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9849E1E21AE1069C005DE333 /* MQAudioDescriptorController.m */; };
+		9849E1E61AE106C1005DE333 /* MQAudioDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9849E1E51AE106C1005DE333 /* MQAudioDescriptor.m */; };
+		9849E1E91AE106D5005DE333 /* MQAudioSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 9849E1E81AE106D5005DE333 /* MQAudioSignature.m */; };
+		9849E1EB1AE1E606005DE333 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9849E1EA1AE1E606005DE333 /* AudioToolbox.framework */; };
 		987FCAEE1AD715D5009BBDF7 /* MQBaseDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 987FCAED1AD715D5009BBDF7 /* MQBaseDescriptor.m */; };
 		987FCAF11AD71604009BBDF7 /* MQImageDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 987FCAF01AD71604009BBDF7 /* MQImageDescriptor.m */; };
 		987FCAF41AD71687009BBDF7 /* MQImageSignatrue.m in Sources */ = {isa = PBXBuildFile; fileRef = 987FCAF31AD71687009BBDF7 /* MQImageSignatrue.m */; };
@@ -31,6 +36,7 @@
 		98853E8F1ADA46AC008015A2 /* MQMotionDescriptorGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 98853E8E1ADA46AC008015A2 /* MQMotionDescriptorGenerator.m */; };
 		98853E921ADA46DF008015A2 /* MQImageBasedDescriptorGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 98853E911ADA46DF008015A2 /* MQImageBasedDescriptorGenerator.m */; };
 		98853E951ADA486E008015A2 /* MQBaseDescriptorGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 98853E941ADA486E008015A2 /* MQBaseDescriptorGenerator.m */; };
+		98936C4D1AE2523500FE6350 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98936C4C1AE2523500FE6350 /* Accelerate.framework */; };
 		98D0A20A1AD49D910040DE9C /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D0A2091AD49D910040DE9C /* AVKit.framework */; };
 		98D0A2101AD4B49A0040DE9C /* MQVideoGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D0A20F1AD4B49A0040DE9C /* MQVideoGenerator.m */; };
 		98D0A2121AD4B4D40040DE9C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D0A2111AD4B4D40040DE9C /* AVFoundation.framework */; };
@@ -82,6 +88,15 @@
 		9809D81C1AD4896C0086C25B /* MultimediaQueryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultimediaQueryTests.m; sourceTree = "<group>"; };
 		9849E1DB1ADF2569005DE333 /* MQMotionDebugVideoGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQMotionDebugVideoGenerator.h; sourceTree = "<group>"; };
 		9849E1DC1ADF2569005DE333 /* MQMotionDebugVideoGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQMotionDebugVideoGenerator.m; sourceTree = "<group>"; };
+		9849E1DE1AE1067A005DE333 /* MQAudioDescriptorGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQAudioDescriptorGenerator.h; sourceTree = "<group>"; };
+		9849E1DF1AE1067A005DE333 /* MQAudioDescriptorGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQAudioDescriptorGenerator.m; sourceTree = "<group>"; };
+		9849E1E11AE1069C005DE333 /* MQAudioDescriptorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQAudioDescriptorController.h; sourceTree = "<group>"; };
+		9849E1E21AE1069C005DE333 /* MQAudioDescriptorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQAudioDescriptorController.m; sourceTree = "<group>"; };
+		9849E1E41AE106C1005DE333 /* MQAudioDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQAudioDescriptor.h; sourceTree = "<group>"; };
+		9849E1E51AE106C1005DE333 /* MQAudioDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQAudioDescriptor.m; sourceTree = "<group>"; };
+		9849E1E71AE106D5005DE333 /* MQAudioSignature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQAudioSignature.h; sourceTree = "<group>"; };
+		9849E1E81AE106D5005DE333 /* MQAudioSignature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQAudioSignature.m; sourceTree = "<group>"; };
+		9849E1EA1AE1E606005DE333 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		987FCAEC1AD715D5009BBDF7 /* MQBaseDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQBaseDescriptor.h; sourceTree = "<group>"; };
 		987FCAED1AD715D5009BBDF7 /* MQBaseDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQBaseDescriptor.m; sourceTree = "<group>"; };
 		987FCAEF1AD71604009BBDF7 /* MQImageDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQImageDescriptor.h; sourceTree = "<group>"; };
@@ -113,6 +128,7 @@
 		98853E911ADA46DF008015A2 /* MQImageBasedDescriptorGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQImageBasedDescriptorGenerator.m; sourceTree = "<group>"; };
 		98853E931ADA486E008015A2 /* MQBaseDescriptorGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQBaseDescriptorGenerator.h; sourceTree = "<group>"; };
 		98853E941ADA486E008015A2 /* MQBaseDescriptorGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQBaseDescriptorGenerator.m; sourceTree = "<group>"; };
+		98936C4C1AE2523500FE6350 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		98D0A2091AD49D910040DE9C /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		98D0A20E1AD4B49A0040DE9C /* MQVideoGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQVideoGenerator.h; sourceTree = "<group>"; };
 		98D0A20F1AD4B49A0040DE9C /* MQVideoGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQVideoGenerator.m; sourceTree = "<group>"; };
@@ -143,6 +159,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98936C4D1AE2523500FE6350 /* Accelerate.framework in Frameworks */,
+				9849E1EB1AE1E606005DE333 /* AudioToolbox.framework in Frameworks */,
 				987FCB061AD765F5009BBDF7 /* CorePlot.framework in Frameworks */,
 				987FCB041AD7659D009BBDF7 /* QuartzCore.framework in Frameworks */,
 				987FCB011AD75FAC009BBDF7 /* VideoToolbox.framework in Frameworks */,
@@ -239,6 +257,8 @@
 				98853E941ADA486E008015A2 /* MQBaseDescriptorGenerator.m */,
 				9849E1DB1ADF2569005DE333 /* MQMotionDebugVideoGenerator.h */,
 				9849E1DC1ADF2569005DE333 /* MQMotionDebugVideoGenerator.m */,
+				9849E1DE1AE1067A005DE333 /* MQAudioDescriptorGenerator.h */,
+				9849E1DF1AE1067A005DE333 /* MQAudioDescriptorGenerator.m */,
 			);
 			name = Generator;
 			sourceTree = "<group>";
@@ -259,6 +279,8 @@
 		987FCB021AD75FBD009BBDF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				98936C4C1AE2523500FE6350 /* Accelerate.framework */,
+				9849E1EA1AE1E606005DE333 /* AudioToolbox.framework */,
 				987FCB051AD765F5009BBDF7 /* CorePlot.framework */,
 				987FCB031AD7659D009BBDF7 /* QuartzCore.framework */,
 				987FCB001AD75FAC009BBDF7 /* VideoToolbox.framework */,
@@ -287,6 +309,10 @@
 				98853E881ADA2CA3008015A2 /* MQMotionDescriptor.m */,
 				98853E8A1ADA344C008015A2 /* MQMotionSignature.h */,
 				98853E8B1ADA344C008015A2 /* MQMotionSignature.m */,
+				9849E1E41AE106C1005DE333 /* MQAudioDescriptor.h */,
+				9849E1E51AE106C1005DE333 /* MQAudioDescriptor.m */,
+				9849E1E71AE106D5005DE333 /* MQAudioSignature.h */,
+				9849E1E81AE106D5005DE333 /* MQAudioSignature.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -310,6 +336,8 @@
 				98F7DDDF1AD8C14100C01ACD /* MQSourceVideoPreviewController.m */,
 				98853E841ADA2C68008015A2 /* MQMotionDescriptorController.h */,
 				98853E851ADA2C68008015A2 /* MQMotionDescriptorController.m */,
+				9849E1E11AE1069C005DE333 /* MQAudioDescriptorController.h */,
+				9849E1E21AE1069C005DE333 /* MQAudioDescriptorController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -436,6 +464,7 @@
 				98D0C3021AD611FE0040DE9C /* MQQueryResultViewController.m in Sources */,
 				98853E8F1ADA46AC008015A2 /* MQMotionDescriptorGenerator.m in Sources */,
 				98FF11391AD661D6004A9E43 /* NSNotificationCenter+Helper.m in Sources */,
+				9849E1E31AE1069C005DE333 /* MQAudioDescriptorController.m in Sources */,
 				98853E861ADA2C68008015A2 /* MQMotionDescriptorController.m in Sources */,
 				987FCAF41AD71687009BBDF7 /* MQImageSignatrue.m in Sources */,
 				987FCAFB1AD751E5009BBDF7 /* MQQueryVideoPreviewController.m in Sources */,
@@ -444,10 +473,13 @@
 				98FF11351AD646BB004A9E43 /* MQBrain.m in Sources */,
 				9809D8061AD4896C0086C25B /* main.m in Sources */,
 				98853E921ADA46DF008015A2 /* MQImageBasedDescriptorGenerator.m in Sources */,
+				9849E1E01AE1067B005DE333 /* MQAudioDescriptorGenerator.m in Sources */,
 				98F7DDD81AD8BD1D00C01ACD /* MQIndicatorView.m in Sources */,
 				987FCAF81AD7279C009BBDF7 /* MQImageDescriptorGenerator.m in Sources */,
+				9849E1E61AE106C1005DE333 /* MQAudioDescriptor.m in Sources */,
 				9809D8041AD4896C0086C25B /* AppDelegate.m in Sources */,
 				98853E951ADA486E008015A2 /* MQBaseDescriptorGenerator.m in Sources */,
+				9849E1E91AE106D5005DE333 /* MQAudioSignature.m in Sources */,
 				98853E891ADA2CA3008015A2 /* MQMotionDescriptor.m in Sources */,
 				987FCB091AD7678E009BBDF7 /* MQImageDescriptorViewController.m in Sources */,
 			);

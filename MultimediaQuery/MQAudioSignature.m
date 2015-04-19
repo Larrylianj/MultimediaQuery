@@ -8,9 +8,13 @@
 
 #import "MQAudioSignature.h"
 
+const UInt32 dataLength = 32;
+
 @interface MQAudioSignature () {
-    Float32 _data[32];
+    Float32 _data[dataLength];
 }
+
+@property (nonatomic, assign) Float32 totalMagnitude;
 
 @end
 
@@ -19,7 +23,7 @@
 - (id)initWithData:(Float32 *)data; {
     self = [super init];
     if (self) {
-        memcpy(_data, data, 32 * sizeof(Float32));
+        memcpy(_data, data, dataLength * sizeof(Float32));
     }
     return self;
 }
@@ -27,16 +31,18 @@
 - (id)initWithJSONArray:(NSArray *)array {
     self = [super init];
     if (self) {
-        for (int i = 0; i < 32; i++) {
-            _data[i] = [array[i] floatValue];
+        for (int i = 0; i < dataLength; i++) {
+            float value = [array[i] floatValue];
+            _data[i] = value;
+            _totalMagnitude += value;
         }
     }
     return self;
 }
 
 - (NSArray *)JSONPresentation {
-    NSMutableArray *array = [NSMutableArray arrayWithCapacity:32];
-    for (int i = 0; i < 32; i++) {
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:dataLength];
+    for (int i = 0; i < dataLength; i++) {
         array[i] = @(_data[i]);
     }
     return array;
@@ -49,11 +55,17 @@
 - (float)distanceToSignature:(MQAudioSignature *)sig {
     float diff = 0;
     Float32 *other = [sig data];
-    for (int i = 0; i < 32; i++) {
-        float sim = MIN(other[i], _data[i]) / MAX(other[i], _data[i]);
-        if (sim > 0.8) sim = 1;
-        if (sim < 0.3) sim = 0;
-        diff += (1 - sim) / 32;
+    for (int i = 0; i < dataLength; i++) {
+        float max = MAX(_data[i], other[i]);
+        float sim = max != 0 ? MIN(_data[i], other[i]) / max : 1;
+        
+        float currDiff = 0;
+        if (sim > 0.7) currDiff = 0;
+        else if (sim < 0.1) currDiff = 1;
+        else currDiff = 1 - sim;
+        
+        float weight = (_data[i] + other[i]) / (_totalMagnitude + sig.totalMagnitude);
+        diff += currDiff * weight;
     }
     return diff;
 }

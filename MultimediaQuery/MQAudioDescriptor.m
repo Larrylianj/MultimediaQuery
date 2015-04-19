@@ -27,9 +27,6 @@
 - (void)updateWithQueryVideoAudioDescriptor:(MQAudioDescriptor *)query {
     NSUInteger m = self.audioSignatures.count;
     NSUInteger n = query.audioSignatures.count;
-//    for (MQAudioSignature *sig in query.audioSignatures) {
-//        NSLog(@"%@", sig.JSONPresentation);
-//    }
     
     NSMutableArray *matchingScroes = [[NSMutableArray alloc] initWithCapacity:self.audioSignatures.count];
     
@@ -66,6 +63,9 @@
         MQAudioSignature *sig = [[MQAudioSignature alloc] initWithJSONArray:sigArr];
         [self appendAudioSignature:sig];
     }
+//    for (MQAudioSignature *sig in self.audioSignatures) {
+//        NSLog(@"%@", sig.JSONPresentation);
+//    }
 }
 
 @end

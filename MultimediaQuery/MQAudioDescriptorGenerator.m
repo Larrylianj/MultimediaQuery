@@ -17,7 +17,8 @@ const UInt32 sampleRate = 44100;
 const UInt32 frameRate = 30;
 const UInt32 maxSampleCount = 1024;
 const UInt32 outputCount = maxSampleCount / 2;
-const UInt32 quantizeBucketSize = outputCount / 32;
+const UInt32 quantizeBufferSize = 32;
+const UInt32 quantizeBucketSize = outputCount / quantizeBufferSize;
 
 const Float32 kAdjust0DB = 1.5849e-13;
 
@@ -30,7 +31,7 @@ const Float32 kAdjust0DB = 1.5849e-13;
     Float32             mFFTNormFactor;
     UInt32              mFFTLength;
     vDSP_Length         mLog2N;
-    Float32             quantizedResult[32];
+    Float32             quantizedResult[quantizeBufferSize];
 }
 
 @end
@@ -115,7 +116,7 @@ const Float32 kAdjust0DB = 1.5849e-13;
     //Convert the fft data to dB
     vDSP_zvmags(&mDspSplitComplex, 1, outFFTData, 1, mFFTLength);
     
-    //In order to avoid taking log10 of zero, an adjusting factor is added in to make the minimum value equal -128dB
+    // In order to avoid taking log10 of zero, an adjusting factor is added in to make the minimum value equal -128dB
     vDSP_vsadd(outFFTData, 1, &kAdjust0DB, outFFTData, 1, mFFTLength);
     Float32 one = 1;
     vDSP_vdbcon(outFFTData, 1, &one, outFFTData, 1, mFFTLength, 0);
@@ -124,21 +125,28 @@ const Float32 kAdjust0DB = 1.5849e-13;
 - (MQAudioSignature *)audioSignatureForWavechunk:(short *)chunk numberOfSamples:(NSUInteger)numberOfSamples {
     
     // Setup the length
-    memset(quantizedResult, 0, 32 * sizeof(Float32));
-    for (int chnl = 0; chnl < numberOfChannels; chnl++) {
-        for (int i = 0; i < MIN(numberOfSamples, maxSampleCount); i++) {
-            inAudioData[i] = (Float32)chunk[i * 2 + chnl] / 32768;
+    memset(quantizedResult, 0, quantizeBufferSize * sizeof(Float32));
+    memset(inAudioData, 0, maxSampleCount * sizeof(Float32));
+    for (NSUInteger i = 0; i < MIN(numberOfSamples, maxSampleCount); i++) {
+        inAudioData[i] = (Float32)chunk[i * numberOfChannels];
+        for (NSUInteger j = 1; j < numberOfChannels; j++) {
+            inAudioData[i] += (Float32)chunk[i * numberOfChannels + j];
         }
-        [self computeFFT];
-        for (int i = 0; i < outputCount; i++) {
-            int idx = i / quantizeBucketSize;
-            quantizedResult[idx] += (outFFTData[i] + 128) / 256 / quantizeBucketSize / numberOfChannels;
-
-            // NSLog(@"idx: %@, i: %@, v: %@", @(idx), @(i), @(outFFTData[i]));
-        }
+        inAudioData[i] /= 2;
     }
+    [self computeFFT];
+    for (int i = 0; i < outputCount; i++) {
+        int idx = i / quantizeBucketSize;
+        quantizedResult[idx] = MAX(outFFTData[i], quantizedResult[idx]);
+        // NSLog(@"%@, %@, %@, %@", @(i), @(idx), @(outFFTData[i]), @(quantizedResult[idx]));
+    }
+    // Postprocessing
+    for (int i = 0; i < quantizeBufferSize; i++) {
+        if (quantizedResult[i] < 10) quantizedResult[i] = 0;
+    }
+    
     MQAudioSignature *sig = [[MQAudioSignature alloc] initWithData:quantizedResult];
-    NSLog(@"%@", sig.JSONPresentation);
+    // NSLog(@"sig: %@", sig.JSONPresentation);
     return sig;
 }
 

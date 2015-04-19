@@ -108,6 +108,7 @@
     NSString *audioDescriptorFileName = [NSString stringWithFormat:@"%@_audio_descriptor.json", self.name];
     NSString *audioDescriptorFilePath = [NSString stringWithFormat:@"%@/%@", self.sourceFolderPath, audioDescriptorFileName];
     if ([manager fileExistsAtPath:audioDescriptorFilePath]) {
+        NSLog(@"video name: %@", self.name);
         self.audioDescriptor = [[MQAudioDescriptor alloc] initWithJSONFilePath:audioDescriptorFilePath];
     }
 }
